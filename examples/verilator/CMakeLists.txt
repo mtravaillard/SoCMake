@@ -10,4 +10,4 @@ add_executable(testbench main.cpp)
 
 target_link_libraries(testbench cern::ip::adder::0.0.1::vlt)
 
-help()
+help(PRINT_ON_CONF)

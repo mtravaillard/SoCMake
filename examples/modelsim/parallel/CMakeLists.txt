@@ -20,4 +20,4 @@ endforeach()
 
 modelsim(${IP} TARGET_PER_IP)
 
-help()
+help(PRINT_ON_CONF)

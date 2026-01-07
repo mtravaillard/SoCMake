@@ -33,4 +33,4 @@ if(SIMULATOR STREQUAL "vcs" OR ALL_SIMS)
     vcs(${IP})
 endif()
 
-help()
+help(PRINT_ON_CONF)

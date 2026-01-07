@@ -57,4 +57,4 @@ if(SIMULATOR STREQUAL "verilator")
     target_link_libraries(verilator_tb tb__vlt)
 endif()
 
-help()
+help(PRINT_ON_CONF)

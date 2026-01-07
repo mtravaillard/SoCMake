@@ -118,4 +118,4 @@ if(SIMULATOR STREQUAL "osci")
 
 endif()
 
-help()
+help(PRINT_ON_CONF)

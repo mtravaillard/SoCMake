@@ -21,4 +21,4 @@ elseif(SIM_TYPE STREQUAL GENERIC)
     # ip_sources(${IP} SYSTEMVERILOG <SIM_FILES>)
 endif()
 
-help()
+help(PRINT_ON_CONF)

@@ -42,4 +42,4 @@ if(SIMULATOR STREQUAL "vcs" OR ALL_SIMS)
 endif()
 
 
-help()
+help(PRINT_ON_CONF)

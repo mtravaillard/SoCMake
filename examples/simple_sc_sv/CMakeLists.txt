@@ -34,5 +34,5 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     VERBOSE
     )
 
-help()
+help(PRINT_ON_CONF)
 

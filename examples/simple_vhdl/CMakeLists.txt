@@ -37,4 +37,4 @@ if(SIMULATOR STREQUAL "ghdl" OR ALL_SIMS)
     ghdl(${IP})
 endif()
 
-help()
+help(PRINT_ON_CONF)
