@@ -16,6 +16,10 @@ For this step make sure you have Iverilog and/or Verilator installed on your sys
 
 Lets create a simple verilog testbench file:
 
+:::info
+The same example is also available with VHDL, you can find the source code [here](https://github.com/HEP-SoC/SoCMake/tree/master/examples/simple_vhdl), you can follow the same instructions than in this tutorial if you choose to do it with vhdl.
+:::
+
 import CodeBlock from '@theme/CodeBlock';
 export const tb_v = require('!!raw-loader!../../../examples/simple_verilog/tb.v')?.default;
 export const cmakelists = require('!!raw-loader!../../../examples/simple_verilog/CMakeLists.txt')?.default;
