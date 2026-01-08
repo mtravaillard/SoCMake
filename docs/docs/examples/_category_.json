@@ -3,7 +3,7 @@
   "position": 4,
   "link": {
     "type": "generated-index",
-    "description": "Simple examples on how to use SoCMake for different tasks"
+    "description": "Simple examples on how to use SoCMake for different tasks, the first examples are for showing some interesting features and then the others show more concrete examples with different tools"
   }
 }
 

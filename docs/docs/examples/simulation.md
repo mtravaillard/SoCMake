@@ -1,9 +1,12 @@
 ---
-sidebar_position: 1
+sidebar_position: 3
 ---
 
 # Simulation
 
+:::info
+The source code for this example can be found in [examples/simple_verilog](https://github.com/HEP-SoC/SoCMake/tree/master/examples/simple_verilog)
+:::
 
 In the previous section [Getting Started](../getting_started.mdx), we saw how to download SoCMake inside our project.
 
