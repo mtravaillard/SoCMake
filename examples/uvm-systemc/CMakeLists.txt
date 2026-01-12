@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.28)
-project(uvm-systemc_example CXX)
+cmake_minimum_required(VERSION 3.25)
+project(uvm-systemc_example CXX C)
 
 include("../../SoCMakeConfig.cmake")
 
