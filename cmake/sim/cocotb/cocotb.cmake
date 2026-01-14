@@ -137,7 +137,7 @@ function(cocotb IP_LIB)
             NO_RUN_TARGET
             TOP_MODULE ${ARG_TOP_MODULE}
             OUTDIR ${cocotb_sim_build}
-            SV_COMPILE_ARGS -DCOCOTB_SIM=1 -g2012 -f${CMDS_FILE}
+            IVERILOG_ARGS -DCOCOTB_SIM=1 -g2012 -f${CMDS_FILE}
             RUN_ARGS -M${COCOTB_LIB_DIR} -m${COCOTB_LIB_NAME}
         )
 
