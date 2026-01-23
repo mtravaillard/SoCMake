@@ -24,9 +24,19 @@ function(systemc_build)
         endif()
     endif()
 
+    set(_systemc_hints
+    ${SYSTEMC_HOME}
+    $ENV{SYSTEMC_HOME}
+    ${ARG_INSTALL_DIR}
+    )
+
+    # Exclude any path that starts with "/localdata/CI"
+    # Fix a problem in CI, from finding a package belonging to an other CI runner.
+    list(FILTER _systemc_hints EXCLUDE REGEX "^/localdata/CI")
+
     find_package(SystemCLanguage ${ARG_VERSION} CONFIG
-        HINTS ${SYSTEMC_HOME} $ENV{SYSTEMC_HOME} ${ARG_INSTALL_DIR} 
-        )
+        HINTS ${_systemc_hints}
+    )
 
     if(ARG_EXACT_VERSION)
         if(NOT "${SystemCLanguage_VERSION_MAJOR}.${SystemCLanguage_VERSION_MINOR}.${SystemCLanguage_VERSION_PATCH}" STREQUAL ${ARG_VERSION})
