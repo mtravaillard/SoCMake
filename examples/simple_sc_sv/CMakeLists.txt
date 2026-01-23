@@ -5,7 +5,9 @@ project(simple_sc_sv_example C CXX)
 include("../../SoCMakeConfig.cmake")
 
 # Compile SystemC library during initial CMake configure time
-systemc_build(VERSION 3.0.0 EXACT_VERSION)
+systemc_build(VERSION 3.0.0 EXACT_VERSION
+    INSTALL_DIR ${CMAKE_CURRENT_LIST_DIR}/deps/_deps
+    )
 
 # Add the Verilog DUT
 add_subdirectory(adder)
