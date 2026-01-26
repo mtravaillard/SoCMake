@@ -21,7 +21,7 @@ add_executable(simple_sc_sv_example
     )
 
 # Link SystemC and the static library of the DUT to the executable
-target_link_libraries(${PROJECT_NAME} PRIVATE
+target_link_libraries(${PROJECT_NAME} PUBLIC
     # External libraries
     SystemC::systemc
 
@@ -30,7 +30,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     )
 
 # Add VERBOSE flag to enable message printing
-target_compile_definitions(${PROJECT_NAME} PRIVATE
+target_compile_definitions(${PROJECT_NAME} PUBLIC
     VERBOSE
     )
 
