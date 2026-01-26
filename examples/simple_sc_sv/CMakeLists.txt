@@ -26,7 +26,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
     SystemC::systemc
 
     # Verilated HDL
-   adder__vlt 
+    adder__vlt 
     )
 
 # Add VERBOSE flag to enable message printing
