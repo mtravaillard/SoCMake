@@ -3,7 +3,7 @@ project(systemc_build)
 
 include("../../utils/option.cmake")
 
-set(SYSTEMC_VERSIONS 3.0.0 2.3.4 2.3.3 2.3.2 2.3.1a 2.3.0a)
+set(SYSTEMC_VERSIONS 3.0.0 3.0.2 2.3.4 2.3.3 2.3.2 2.3.1a 2.3.0a)
 option_enum(VERSION "Version of SystemC to build" "${SYSTEMC_VERSIONS}" "3.0.0")
 option_enum(CMAKE_CXX_STANDARD "C++ Standard" "98;11;14;17;20;23;26" "17")
 
