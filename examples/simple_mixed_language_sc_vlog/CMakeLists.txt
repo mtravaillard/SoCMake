@@ -5,7 +5,7 @@ set(FETCHCONTENT_BASE_DIR ${CMAKE_CURRENT_LIST_DIR}/deps/_deps)
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(SOCMAKE_ADDITIONAL_LANGUAGES SYSTEMC)
 
-option_enum(SIMULATOR "Which Simulator to use" "questa;osci;xcelium;vcs" "vcs")
+option_enum(SIMULATOR "Which Simulator to use" "questa;verilator;xcelium;vcs" "vcs")
 option_enum(TEST_LANG "Language for test module" "verilog;systemc" "verilog")
 option_enum(DUT_LANG "Language for DUT modules" "verilog;systemc" "verilog")
 option_boolean(QUESTA_GUI "Use GUI for questasim" OFF)
@@ -70,7 +70,7 @@ endif()
 # ######### Open-Source simulation ###############
 # ################################################
 
-if(SIMULATOR STREQUAL "osci")
+if(SIMULATOR STREQUAL "verilator")
     if(TEST_LANG STREQUAL "verilog" AND DUT_LANG STREQUAL "systemc")
         message(FATAL_ERROR "Incorrect project configuration, Open-Source simulation cannot support Verilog-SystemC hierachy")
     endif()
