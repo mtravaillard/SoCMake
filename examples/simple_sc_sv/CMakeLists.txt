@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.25)
 project(simple_sc_sv_example C CXX)
 
+# Tell cmake that C++17 needs to be used
+set (CMAKE_CXX_STANDARD 17)
+
 # Include SoCMake build system
 include("../../SoCMakeConfig.cmake")
 
