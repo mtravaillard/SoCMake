@@ -1,7 +1,7 @@
 include("../../SoCMakeConfig.cmake")
 
-# Tell cmake that C++17 needs to be used
-set (CMAKE_CXX_STANDARD 17)
+# Tell cmake that C++14 needs to be used
+set (CMAKE_CXX_STANDARD 14)
 
 set(FETCHCONTENT_BASE_DIR ${CMAKE_CURRENT_LIST_DIR}/deps/_deps)
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
