@@ -1,8 +1,5 @@
 include("../../SoCMakeConfig.cmake")
 
-# Tell cmake that C++14 needs to be used
-set (CMAKE_CXX_STANDARD 14)
-
 set(FETCHCONTENT_BASE_DIR ${CMAKE_CURRENT_LIST_DIR}/deps/_deps)
 set(CMAKE_EXPORT_COMPILE_COMMANDS TRUE)
 set(SOCMAKE_ADDITIONAL_LANGUAGES SYSTEMC)
@@ -21,7 +18,7 @@ elseif(SIMULATOR STREQUAL "vcs")
 endif()
 
 # If Using Verilator and Testbench is Verilog, we need coroutines for --timing from C++17
-if(SIMULATOR STREQUAL "osci" AND TEST_LANG STREQUAL "verilog")
+if(SIMULATOR STREQUAL "verilator" AND TEST_LANG STREQUAL "verilog")
     set(CMAKE_CXX_STANDARD 17)
 else()
     set(CMAKE_CXX_STANDARD 11)
