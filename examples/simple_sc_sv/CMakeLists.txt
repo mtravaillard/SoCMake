@@ -8,7 +8,7 @@ set (CMAKE_CXX_STANDARD 17)
 include("../../SoCMakeConfig.cmake")
 
 # Compile SystemC library during initial CMake configure time
-systemc_build(VERSION 3.0.2 EXACT_VERSION)
+systemc_build(VERSION 3.0.0 EXACT_VERSION)
 
 # Add the Verilog DUT
 add_subdirectory(adder)

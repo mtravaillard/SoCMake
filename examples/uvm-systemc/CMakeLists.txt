@@ -5,7 +5,7 @@ include("../../SoCMakeConfig.cmake")
 
 set(FETCHCONTENT_BASE_DIR ${CMAKE_CURRENT_LIST_DIR}/deps/_deps)
 
-systemc_build(VERSION 3.0.2 EXACT_VERSION)
+systemc_build(VERSION 3.0.0 EXACT_VERSION)
 uvm_systemc_build(VERSION 1.0-beta6)
 
 add_executable(systemc_example
