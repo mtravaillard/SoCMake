@@ -24,9 +24,11 @@ function(systemc_build)
         endif()
     endif()
 
+    set(CMAKE_FIND_DEBUG_MODE ON)
     find_package(SystemCLanguage ${ARG_VERSION} CONFIG
         HINTS ${SYSTEMC_HOME} $ENV{SYSTEMC_HOME} ${ARG_INSTALL_DIR} 
         )
+    set(CMAKE_FIND_DEBUG_MODE OFF)
 
     if(ARG_EXACT_VERSION)
         if(NOT "${SystemCLanguage_VERSION_MAJOR}.${SystemCLanguage_VERSION_MINOR}.${SystemCLanguage_VERSION_PATCH}" STREQUAL ${ARG_VERSION})
