@@ -1,8 +1,3 @@
----
-sidebar_position: 0
----
-
-# Available examples
 This table present the examples that are currently available with SoCMake, their current states and the tools that they support:
 <div align="center">
 
