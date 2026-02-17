@@ -103,7 +103,7 @@ output:
   # If true, they are instead resolved with regard to the directory where the highest priority
   # output.directory property is specified. If the highest priority config source does not have
   # a file, the current working directory is instead used.
-  relative_to_config: true
+  relative_to_config: false
 
 logging:
   # Supports all Python logging dict config options
