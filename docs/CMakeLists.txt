@@ -17,9 +17,22 @@ find_python3()
 set(DOC_INPUT_DIR "${PROJECT_SOURCE_DIR}/../cmake/")
 set(DOC_OUTPUT_DIR "${PROJECT_BINARY_DIR}/api_source")
 set(HTML_SPHINX_OUTPUT_DIR "${PROJECT_BINARY_DIR}/api_html")
+# List of file or directory to be excluded from the recursive search.
+# By forcing recursive search in our cminx config file, we are able to search into the full cmake/
+# to find all the .cmake, but we don't want to have some .cmake file that doesn't have functions
+# or repository without .cmake file having an .rst generated.
+# Using the config file with the include_undocumented_XXXX parameter does not solve this problem.
+# So if a new file is not available in the api doc, it might be excluded with this list.
+set(EXCLUDE_FROM_RST
+    -e "*Config.cmake"
+    -e "*firmware"
+    -e "*flows"
+    -e "*FindYosys.cmake"
+    -e "*graphviz*"
+)
 # Cminx is used to convert SoCMake function comments into rST format later transformed to a
 # static html documentation using sphinx
-set(VENV_CMD $ENV{VIRTUAL_ENV}/bin/cminx -o ${DOC_OUTPUT_DIR} -s ${PROJECT_SOURCE_DIR}/api/api_config.yaml -e "*Config.cmake" -r ${DOC_INPUT_DIR})
+set(VENV_CMD $ENV{VIRTUAL_ENV}/bin/cminx -o ${DOC_OUTPUT_DIR} -s ${PROJECT_SOURCE_DIR}/api/api_config.yaml ${EXCLUDE_FROM_RST} -r ${DOC_INPUT_DIR})
 # This command trigger the rST to html conversion and copy into the docusaurus static folder for
 # integration with the latter
 set(DOC_API_MAKE_CMD make -C ${PROJECT_BINARY_DIR}/api_source/ html)
