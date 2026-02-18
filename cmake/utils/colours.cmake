@@ -1,3 +1,6 @@
+#[[[ @module colours
+#]]
+
 if(NOT WIN32)
   string(ASCII 27 Esc)
   set(ColourReset "${Esc}[m")
@@ -20,6 +23,9 @@ endif()
 
 set(__Colours Red Green Yellow Blue Magenta Cyan White BoldRed BoldGreen BoldYellow BoldBlue BoldMagenta BoldCyan BoldWhite)
 
+#[[[
+# To Update
+#]]
 function(msg TEXT COLOUR)
     cmake_parse_arguments(ARG "" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

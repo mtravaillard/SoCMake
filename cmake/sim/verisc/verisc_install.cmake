@@ -1,7 +1,13 @@
+#[[[ @module verisc
+#]]
+
 include_guard(GLOBAL)
 
 set(VERISC_INSTALL_LIST_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "")
 
+#[[[
+# To update
+#]]
 macro(verisc_build)
 
     set(DEPS "SYSTEMC;UVM-SYSTEMC;VERILATOR;FC4SC;ICSC_COMPILER;GCC")

@@ -1,5 +1,11 @@
+#[[[ @module questasim
+#]]
+
 include_guard(GLOBAL)
 
+#[[[
+# To update
+#]]
 function(questasim IP_LIB)
     cmake_parse_arguments(ARG "NO_RUN_TARGET;QUIET;GUI;GUI_VISUALIZER;32BIT" "LIBRARY;TOP_MODULE;OUTDIR;RUN_TARGET_NAME" "VHDL_COMPILE_ARGS;SV_COMPILE_ARGS;RUN_ARGS;FILE_SETS" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -190,7 +196,9 @@ function(questasim IP_LIB)
     socmake_allow_topological_sort(ON)
 endfunction()
 
-
+#[[[
+# To update
+#]]
 function(__questasim_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "QUIET;32BIT" "OUTDIR;LIBRARY" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -424,7 +432,9 @@ function(__questasim_compile_lib IP_LIB)
 
 endfunction()
 
-
+#[[[
+# To update
+#]]
 function(__get_questasim_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -472,6 +482,9 @@ function(__get_questasim_search_lib_args IP_LIB)
     set(DPI_LIBS_ARGS ${dpi_libs_args} PARENT_SCOPE)
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__find_questasim_home OUTVAR)
     find_program(exec_path vsim REQUIRED)
     get_filename_component(bin_path "${exec_path}" DIRECTORY)
@@ -480,6 +493,9 @@ function(__find_questasim_home OUTVAR)
     set(${OUTVAR} ${questasim_home} PARENT_SCOPE)
 endfunction()
 
+#[[[
+# To update
+#]]
 function(questasim_gen_sc_wrapper IP_LIB)
     cmake_parse_arguments(ARG "32BIT;QUIET" "OUTDIR;LIBRARY;TOP_MODULE" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -589,6 +605,9 @@ function(questasim_gen_sc_wrapper IP_LIB)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 function(questasim_compile_sc_lib SC_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "" ${ARGN})
     # Check for any unrecognized arguments
@@ -660,7 +679,9 @@ function(questasim_compile_sc_lib SC_LIB)
     set_property(TARGET ${SC_LIB}_${CMAKE_CURRENT_FUNCTION} PROPERTY DESCRIPTION ${DESCRIPTION})
 endfunction()
 
-
+#[[[
+# To update
+#]]
 macro(questasim_configure_cxx)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})
 
@@ -680,6 +701,9 @@ macro(questasim_configure_cxx)
     endif()
 endmacro()
 
+#[[[
+# To update
+#]]
 function(questasim_add_cxx_libs)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})
     # Check for any unrecognized arguments
@@ -742,6 +766,9 @@ function(questasim_add_cxx_libs)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 macro(modelsim)
     message(DEPRECATION "${Red}modelsim function is deprecated, questasim() is called instead${ColourReset}")
     questasim(${ARGV})

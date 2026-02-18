@@ -1,3 +1,9 @@
+#[[[ @module verilator
+#]]
+
+#[[[
+# To update
+#]]
 function(verilator IP_LIB)
     set(OPTIONS "COVERAGE;TRACE;TRACE_FST;SYSTEMC;TRACE_STRUCTS;MAIN;TIMING;NO_RUN_TARGET")
     set(ONE_PARAM_ARGS "PREFIX;TOP_MODULE;THREADS;TRACE_THREADS;DIRECTORY;EXECUTABLE_NAME;RUN_TARGET_NAME")
@@ -296,6 +302,9 @@ function(verilator IP_LIB)
     socmake_allow_topological_sort(ON)
 endfunction()
 
+#[[[
+# To update
+#]]
 macro(verilator_configure_cxx)
     cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
     if(ARG_LIBRARIES)
@@ -303,6 +312,9 @@ macro(verilator_configure_cxx)
     endif()
 endmacro()
 
+#[[[
+# To update
+#]]
 function(verilator_add_cxx_libs)
     cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

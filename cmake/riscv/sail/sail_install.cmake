@@ -1,7 +1,13 @@
+#[[[ @module sail
+#]]
+
 include_guard(GLOBAL)
 
 set(SAIL_INSTALL_LIST_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "")
 
+#[[[
+# To update
+#]]
 # SAIL C-emulator installation macro
 macro(sail_install)
     cmake_parse_arguments(ARG "" "" "" ${ARGN})

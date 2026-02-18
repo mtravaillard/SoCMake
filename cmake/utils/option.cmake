@@ -1,3 +1,9 @@
+#[[[ @module option
+#]]
+
+#[[[
+# To Update
+#]]
 function(__define_socmake_option NAME TYPE DESCRIPTION DEFAULT ADVANCED)
     cmake_parse_arguments(ARG "" "" "POSSIBLE_VALUES" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

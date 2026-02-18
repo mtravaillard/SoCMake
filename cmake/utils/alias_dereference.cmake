@@ -1,3 +1,6 @@
+#[[[ @module alias_dereference
+#]]
+
 #[[[
 # This function returns the original library name if the given one is an alias.
 #

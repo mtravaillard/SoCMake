@@ -1,5 +1,11 @@
+#[[[ @module xilinx
+#]]
+
 include_guard(GLOBAL)
 
+#[[[
+# To update
+#]]
 function(vivado_sim IP_LIB)
     cmake_parse_arguments(ARG "NO_RUN_TARGET;GUI" "RUN_TARGET_NAME;TOP_MODULE" "XVLOG_ARGS;XVHDL_ARGS;XELAB_ARGS;XSIM_ARGS;RUN_ARGS;FILE_SETS" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -132,6 +138,9 @@ function(vivado_sim IP_LIB)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__vivado_sim_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR" "XVLOG_ARGS;XVHDL_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -262,6 +271,9 @@ function(__vivado_sim_compile_lib IP_LIB)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 macro(vivado_sim_configure_cxx)
     cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
 
@@ -274,6 +286,9 @@ macro(vivado_sim_configure_cxx)
     endif()
 endmacro()
 
+#[[[
+# To update
+#]]
 function(vivado_sim_add_cxx_libs)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})
     # Check for any unrecognized arguments

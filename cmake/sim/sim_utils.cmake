@@ -1,5 +1,11 @@
+#[[[ @module sim_utils
+#]]
+
 include_guard(GLOBAL)
 
+#[[[
+# To update
+#]]
 macro(__check_linked_interface_lib)
     get_target_property(linked_libraries ${IP_LIB} LINK_LIBRARIES)
 
@@ -10,21 +16,33 @@ macro(__check_linked_interface_lib)
     endif()
 endmacro()
 
+#[[[
+# To update
+#]]
 function(__is_socmake_systemc_lib RESULT IP_LIB)
     set(__lib_to_check "SoCMake::SystemC")
     __check_linked_interface_lib()
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__is_socmake_dpic_lib RESULT IP_LIB)
     set(__lib_to_check "SoCMake::DPI-C")
     __check_linked_interface_lib()
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__is_socmake_vhpi_lib RESULT IP_LIB)
     set(__lib_to_check "SoCMake::VHPI")
     __check_linked_interface_lib()
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__is_socmake_ip_lib RESULT IP_LIB)
     get_target_property(ip_type ${IP_LIB} TYPE)
     get_target_property(ip_name ${IP_LIB} IP_NAME)

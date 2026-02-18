@@ -1,9 +1,15 @@
+#[[[ @module socmake_graph
+#]]
+
 include_guard(GLOBAL)
 
+#[[[
+# To Update
+#
 # ========================================================== #
 # ======== Internal graph flattening functions ============= #
 # ========================================================== #
-
+#]]
 function(flatten_graph NODE)
     alias_dereference(NODE ${NODE})
 
@@ -29,9 +35,13 @@ function(flatten_graph NODE)
     set_property(TARGET ${NODE} PROPERTY FLAT_GRAPH ${STACK})
 endfunction()
 
+#[[[
+# To Update
+#
 # ------------------------------------------------------------------ #
 # Recursive DFS topological sort
 # ------------------------------------------------------------------ #
+#]]
 function(__dfs_topo NODE RET)
     alias_dereference(NODE ${NODE})
 
@@ -85,9 +95,13 @@ function(__dfs_topo NODE RET)
     set(${RET} 1 PARENT_SCOPE)
 endfunction()
 
+#[[[
+# To Update
+#
 # ------------------------------------------------------------------ #
 # Utility: compare lists (unchanged)
 # ------------------------------------------------------------------ #
+#]]
 function(compare_lists L1 L2 RET)
     set(_l1 ${L1})
     set(_l2 ${L2})

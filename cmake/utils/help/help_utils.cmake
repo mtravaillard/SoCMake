@@ -1,3 +1,6 @@
+#[[[ @module help
+#]]
+
 include_guard(GLOBAL)
 
 find_program(JQ_EXECUTABLE jq)
@@ -6,6 +9,10 @@ if(NOT JQ_EXECUTABLE)
     message(WARNING "Could not find \"jq\" executable, help menu's will not be available, please install jq")
 endif()
 
+
+#[[[
+# To Update
+#]]
 function(__cmake_to_json_array OUTVAR)
     set(values_array "[]")
     if(ARGN)
@@ -19,6 +26,10 @@ function(__cmake_to_json_array OUTVAR)
     set(${OUTVAR} ${values_array} PARENT_SCOPE)
 endfunction()
 
+
+#[[[
+# To Update
+#]]
 function(_create_help_target HELP_NAME JQ_FILE OUTFILE GROUP_NAME)
     cmake_parse_arguments(ARG "PRINT_ON_CONF" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -60,6 +71,9 @@ function(_create_help_target HELP_NAME JQ_FILE OUTFILE GROUP_NAME)
 
 endfunction()
 
+#[[[
+# To Update
+#]]
 function(help_options)
     cmake_parse_arguments(ARG "PRINT_ON_CONF" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -114,7 +128,9 @@ function(help_options)
 
 endfunction()
 
-
+#[[[
+# To Update
+#]]
 function(help_ips)
     cmake_parse_arguments(ARG "PRINT_ON_CONF" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -160,6 +176,9 @@ function(help_ips)
     _create_help_target("ips" "ip.jq" ${outfile} "*" ${ARG_PRINT_ON_CONF})
 endfunction()
 
+#[[[
+# To Update
+#]]
 function(help_targets)
     cmake_parse_arguments(ARG "PRINT_ON_CONF" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -211,7 +230,9 @@ function(help_targets)
 
 endfunction()
 
-
+#[[[
+# To Update
+#]]
 function(help_custom_targets GROUP_NAME)
     cmake_parse_arguments(ARG "DONT_MAKE_GROUP;PRINT_ON_CONF" "PATTERN;DESCRIPTION;HELP_TARGET_NAME" "LIST" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -248,6 +269,9 @@ function(help_custom_targets GROUP_NAME)
     _create_help_target("${help_name}" "target.jq" ${outfile} "${GROUP_NAME}" ${ARG_PRINT_ON_CONF})
 endfunction()
 
+#[[[
+# To Update
+#]]
 function(help_custom_ips GROUP_NAME)
     cmake_parse_arguments(ARG "PRINT_ON_CONF" "PATTERN;DESCRIPTION" "LIST" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -277,6 +301,9 @@ function(help_custom_ips GROUP_NAME)
 
 endfunction()
 
+#[[[
+# To Update
+#]]
 function(help_custom_options GROUP_NAME)
     cmake_parse_arguments(ARG "PRINT_ON_CONF" "PATTERN;DESCRIPTION" "LIST" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -306,7 +333,9 @@ function(help_custom_options GROUP_NAME)
 
 endfunction()
 
-
+#[[[
+# To Update
+#]]
 function(help)
     cmake_parse_arguments(ARG "PRINT_ON_CONF" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

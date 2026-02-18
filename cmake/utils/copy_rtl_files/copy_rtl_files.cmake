@@ -1,3 +1,6 @@
+#[[[ @module copy_rtl_files
+#]]
+
 #[[[
 # This function copies the RTL sources of an IP to a given location.
 #

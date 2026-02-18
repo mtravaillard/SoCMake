@@ -1,3 +1,10 @@
+
+#[[[ @module systemrdl
+#]]
+
+#[[[
+# To update
+#]]
 function(desyrdl IP_LIB)
     # Parse keyword arguments
     cmake_parse_arguments(ARG "" "OUTDIR;INTF;TOP_ADDRMAP" "ARGS" ${ARGN})

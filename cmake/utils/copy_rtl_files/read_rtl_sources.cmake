@@ -1,3 +1,6 @@
+#[[[ @module read_rtl_sources
+#]]
+
 #[[[
 # This function reads a file listing RTL files and return a list of paths.
 #

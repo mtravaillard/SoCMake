@@ -1,5 +1,11 @@
+#[[[ @module build_scripts
+#]]
+
 include_guard(GLOBAL)
 
+#[[[
+# To update
+#]]
 function(yosys_build)
 
     cmake_parse_arguments(ARG 

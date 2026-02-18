@@ -1,6 +1,9 @@
+#[[[ @module iverilog
+#]]
+
 include_guard(GLOBAL)
 
-# [[[
+#[[[
 # This function runs the Icarus Verilog (iverilog) tool on a specified IP library.
 #
 # The function is a wrapper around the iverilog tool and generates necessary scripts
@@ -23,7 +26,7 @@ include_guard(GLOBAL)
 # :type EXECUTABLE: string
 # :keyword FILE_SETS: list of file sets to use for simulation.
 # :type FILE_SETS: list[string] 
-# ]]]
+#]]
 function(iverilog IP_LIB)
     # Parse the function arguments
     cmake_parse_arguments(ARG "NO_RUN_TARGET" "TOP_MODULE;OUTDIR;EXECUTABLE;RUN_TARGET_NAME" "SV_COMPILE_ARGS;RUN_ARGS;FILE_SETS" ${ARGN})

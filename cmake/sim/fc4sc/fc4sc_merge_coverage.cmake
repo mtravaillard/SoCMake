@@ -1,5 +1,11 @@
+#[[[ @module fc4sc
+#]]
+
 include_guard(GLOBAL)
 
+#[[[
+# To update
+#]]
 function(fc4sc_merge_coverage DIRECTORY)
     cmake_parse_arguments(ARG "" "OUTFILE;FC4SC_HOME;VERISC_HOME" "DEPENDS" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

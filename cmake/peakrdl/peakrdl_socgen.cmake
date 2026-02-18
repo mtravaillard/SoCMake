@@ -1,3 +1,6 @@
+#[[[ @module peakrdl_socgen
+#]]
+
 #[[[
 # Create a target for invoking PeakRDL-socgen on IP_LIB.
 #

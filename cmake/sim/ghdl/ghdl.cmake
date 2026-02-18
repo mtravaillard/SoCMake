@@ -1,5 +1,11 @@
+#[[[ @module ghdl
+#]]
+
 include_guard(GLOBAL)
 
+#[[[
+# To update
+#]]
 function(__ghdl_get_standard_arg OUTVAR)
     set(SUPPORTED_VHDL_STANDARDS  87 93c 93 00 02 08)
     if(ARGN)
@@ -12,6 +18,9 @@ function(__ghdl_get_standard_arg OUTVAR)
     endif()
 endfunction()
 
+#[[[
+# To update
+#]]
 function(ghdl IP_LIB)
     cmake_parse_arguments(ARG "NO_RUN_TARGET;" "OUTDIR;TOP_MODULE;EXECUTABLE_NAME;STANDARD" "VHDL_COMPILE_ARGS;ELABORATE_ARGS;RUN_ARGS;FILE_SETS" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -131,6 +140,9 @@ function(ghdl IP_LIB)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__ghdl_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "" "LIBRARY;OUTDIR;STANDARD" "VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -241,6 +253,9 @@ function(__ghdl_compile_lib IP_LIB)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__get_ghdl_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -280,6 +295,9 @@ function(__get_ghdl_search_lib_args IP_LIB)
     set(DPI_LIBS_ARGS ${dpi_libs_args} PARENT_SCOPE)
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__add_ghdl_cxx_properties_to_libs IP_LIB)
     if(ARG_UNPARSED_ARGUMENTS)
         message(FATAL_ERROR "${CMAKE_CURRENT_FUNCTION} passed unrecognized argument " "${ARG_UNPARSED_ARGUMENTS}")

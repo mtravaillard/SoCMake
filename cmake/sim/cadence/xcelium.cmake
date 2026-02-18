@@ -1,6 +1,8 @@
 #[[[ @module xcelium
 #]]
 
+include_guard(GLOBAL)
+
 #[[[
 # Create a target for invoking Xcelium (compilation, elaboration, and simulation) on IP_LIB.
 #
@@ -40,9 +42,6 @@
 # :keyword FILE_SETS: Specify list of File sets to retrieve the sources  from
 # :type FILE_SETS: list[string]
 #]]
-
-include_guard(GLOBAL)
-
 function(xcelium IP_LIB)
     cmake_parse_arguments(ARG "NO_RUN_TARGET;GUI;32BIT" "OUTDIR;RUN_TARGET_NAME;TOP_MODULE;LIBRARY" "COMPILE_ARGS;XRUN_COMPILE_ARGS;SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;ELABORATE_ARGS;RUN_ARGS;FILE_SETS;" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -228,6 +227,9 @@ function(xcelium IP_LIB)
     socmake_allow_topological_sort(ON)
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__xcelium_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY;TOP_MODULE" "COMPILE_ARGS;XRUN_COMPILE_ARGS;SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -447,6 +449,9 @@ function(__xcelium_compile_lib IP_LIB)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__get_xcelium_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -483,6 +488,9 @@ function(__get_xcelium_search_lib_args IP_LIB)
     set(DPI_LIBS_ARGS ${dpi_libs_args} PARENT_SCOPE)
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__find_xcelium_home OUTVAR)
     find_program(exec_path xrun REQUIRED)
     get_filename_component(bin_path "${exec_path}" DIRECTORY)
@@ -491,6 +499,9 @@ function(__find_xcelium_home OUTVAR)
     set(${OUTVAR} ${xcelium_home} PARENT_SCOPE)
 endfunction()
 
+#[[[
+# To update
+#]]
 function(xcelium_gen_sc_wrapper IP_LIB)
     cmake_parse_arguments(ARG "32BIT;QUIET" "OUTDIR;LIBRARY;TOP_MODULE" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -590,6 +601,9 @@ function(xcelium_gen_sc_wrapper IP_LIB)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 function(xcelium_gen_hdl_wrapper SC_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "" ${ARGN})
     # Check for any unrecognized arguments
@@ -658,7 +672,9 @@ function(xcelium_gen_hdl_wrapper SC_LIB)
 
 endfunction()
 
-
+#[[[
+# To update
+#]]
 macro(xcelium_configure_cxx)
     cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
 
@@ -671,6 +687,9 @@ macro(xcelium_configure_cxx)
     endif()
 endmacro()
 
+#[[[
+# To update
+#]]
 function(xcelium_add_cxx_libs)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})
     # Check for any unrecognized arguments
@@ -735,6 +754,9 @@ function(xcelium_add_cxx_libs)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__xcelium_default_library OUT_LIB IP_LIB)
     cmake_parse_arguments(ARG "" "LIBRARY" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

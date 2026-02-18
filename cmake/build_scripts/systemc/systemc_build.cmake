@@ -1,4 +1,4 @@
-#[[[ @module systemc
+#[[[ @module build_scripts
 #]]
 
 #[[[

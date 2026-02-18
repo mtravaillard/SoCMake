@@ -1,4 +1,4 @@
-#[[[ @module verilator
+#[[[ @module build_scripts
 #]]
 
 #[[[

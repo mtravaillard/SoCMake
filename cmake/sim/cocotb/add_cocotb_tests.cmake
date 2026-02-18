@@ -1,3 +1,9 @@
+#[[[ @module cocotb_tests
+#]]
+
+#[[[
+# To update
+#]]
 function(add_cocotb_tests IP_LIB DIRECTORY)
     include("${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../utils/subdirectory_search.cmake")
     include("${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../utils/colours.cmake")

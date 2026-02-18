@@ -1,3 +1,9 @@
+#[[[ @module groups
+#]]
+
+#[[[
+# To Update
+#]]
 function(_group_custom_items GROUP_NAME TYPE)
     cmake_parse_arguments(ARG "" "PATTERN" "LIST" ${ARGN})
     
@@ -41,18 +47,30 @@ function(_group_custom_items GROUP_NAME TYPE)
     endforeach()
 endfunction()
 
+#[[[
+# To Update
+#]]
 function(group_custom_targets GROUP_NAME)
     _group_custom_items(${GROUP_NAME} TARGET ${ARGN})
 endfunction()
 
+#[[[
+# To Update
+#]]
 function(group_custom_ips GROUP_NAME)
     _group_custom_items(${GROUP_NAME} IP ${ARGN})
 endfunction()
 
+#[[[
+# To Update
+#]]
 function(group_custom_options GROUP_NAME)
     _group_custom_items(${GROUP_NAME} OPTION ${ARGN})
 endfunction()
 
+#[[[
+# To Update
+#]]
 function(get_all_targets_of_group OUTVAR GROUP_NAME)
     get_all_targets(all_targets)
     set(filtered_targets)

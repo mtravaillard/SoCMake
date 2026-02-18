@@ -1,6 +1,13 @@
+#[[[ @module sed_wor
+#]]
+
+#[[[
+# To Update
+#
 # sed_wor.cmake
 # String replace "wor" with "wire" in all Verilog files files. 
 # This is a workaround for a Verilator not supporting "wor" and similar keywords...
+#]]
 function(sed_wor IP_LIB BINARY_DIR SOURCES)
     file(MAKE_DIRECTORY ${BINARY_DIR}/sed_wor)
     set(MODIFIED_SOURCES "")

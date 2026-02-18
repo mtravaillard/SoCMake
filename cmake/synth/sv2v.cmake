@@ -1,5 +1,11 @@
+#[[[ @module sv2v
+#]]
+
 include_guard(GLOBAL)
 
+#[[[
+# To update
+#]]
 function(sv2v IP_LIB)
     cmake_parse_arguments(ARG "REPLACE" "OUTDIR" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

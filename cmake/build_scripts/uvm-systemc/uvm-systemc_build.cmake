@@ -1,4 +1,4 @@
-#[[[ @module uvm-systemc
+#[[[ @module build_scripts
 #]]
 
 #[[[

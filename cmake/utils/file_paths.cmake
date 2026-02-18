@@ -1,3 +1,6 @@
+#[[[ @module file_paths
+#]]
+
 #[[[
 # This function converts relative paths to absolute paths relative to ${CMAKE_CURRENT_SOURCE_DIR}
 # It replicates the behaviour of target_sources() CMake Function

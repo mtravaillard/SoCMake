@@ -1,4 +1,5 @@
-
+#[[[ @module hwip
+#]]
 include("${CMAKE_CURRENT_LIST_DIR}/utils/socmake_graph.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/utils/alias_dereference.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}//utils/file_paths.cmake")
@@ -514,7 +515,9 @@ function(get_ip_include_directories OUTVAR IP_LIB LANGUAGE)
     set(${OUTVAR} ${INCDIRS} PARENT_SCOPE)
 endfunction()
 
-
+#[[[
+# To update
+#]]
 function(__compare_version RESULT COMPARE_LHS RELATION COMPARE_RHS)
 
     unset(NEGATION)
@@ -540,6 +543,9 @@ function(__compare_version RESULT COMPARE_LHS RELATION COMPARE_RHS)
     endif()
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__ip_link_check_version OUT_IP_WO_VERSION IP_LIB)
     string(REPLACE " " "" ip_lib_str "${IP_LIB}")
     string(REGEX MATCH "(!=|>=|<=|==|<|>)" version_ranges "${ip_lib_str}")
@@ -850,6 +856,9 @@ function(socmake_add_languages)
     set_property(GLOBAL APPEND PROPERTY SOCMAKE_ADDITIONAL_LANGUAGES ${ARGN})
 endfunction()
 
+#[[[
+# To update
+#]]
 function(get_socmake_languages OUTVAR)
     get_property(additional_languages GLOBAL PROPERTY SOCMAKE_ADDITIONAL_LANGUAGES)
 
@@ -935,7 +944,11 @@ function(ip_find_and_link IP_LIB)
     endforeach()
 endfunction()
 
+#[[[
+# To Update
+#
 # Optimization to disable graph flattening too often in EDA tool functions
+#]]
 function(flatten_graph_and_disallow_flattening IP_LIB)
     get_ip_links(ips ${IP_LIB})
     list(POP_BACK ips ips) # get_ip_links already flattens top ip
@@ -945,10 +958,16 @@ function(flatten_graph_and_disallow_flattening IP_LIB)
     socmake_allow_topological_sort(OFF)
 endfunction()
 
+#[[[
+# To update
+#]]
 function(socmake_allow_topological_sort STATE)
     set_property(GLOBAL PROPERTY SOCMAKE_ALLOW_TOPOLOGICAL_SORT ${STATE})
 endfunction()
 
+#[[[
+# To update
+#]]
 function(socmake_get_topological_sort_state OUTVAR)
     get_property(state GLOBAL PROPERTY SOCMAKE_ALLOW_TOPOLOGICAL_SORT)
     if(NOT DEFINED state)
@@ -957,6 +976,9 @@ function(socmake_get_topological_sort_state OUTVAR)
     set(${OUTVAR} ${state} PARENT_SCOPE)
 endfunction()
 
+#[[[
+# To update
+#]]
 function(flatten_graph_if_allowed IP_LIB)
     socmake_get_topological_sort_state(state)
     if(state)

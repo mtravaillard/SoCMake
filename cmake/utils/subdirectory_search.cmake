@@ -1,7 +1,12 @@
+#[[[ @module print_list
+#]]
+
 include_guard(GLOBAL)
 
 # https://stackoverflow.com/questions/7787823/cmake-how-to-get-the-name-of-all-subdirectories-of-a-directory
-
+#[[[
+# To Update
+#]]
 macro(SUBDIRLIST output_var dir)
   file(GLOB children RELATIVE ${dir} ${dir}/*)
   set(dirlist "")
@@ -13,6 +18,9 @@ macro(SUBDIRLIST output_var dir)
   set(${output_var} ${dirlist})
 endmacro()
 
+#[[[
+# To Update
+#]]
 macro(SUBDIRLIST_EXCLUDE output_var dir excluded_patterns)
     # Get all subdirectories
     SUBDIRLIST(SUBDIRS ${dir})

@@ -1,3 +1,9 @@
+#[[[ @module fpga
+#]]
+
+#[[[
+# To update
+#]]
 function(vivado IP_LIB)
     cmake_parse_arguments(ARG "" "TOP" "VERILOG_DEFINES" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

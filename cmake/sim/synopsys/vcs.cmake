@@ -1,7 +1,13 @@
+#[[[ @module vcs
+#]]
+
 include_guard(GLOBAL)
 
 socmake_add_languages(VCS_SC_PORTMAP)
 
+#[[[
+# To update
+#]]
 function(vcs IP_LIB)
     cmake_parse_arguments(ARG "NO_RUN_TARGET;GUI;32BIT" "OUTDIR;EXECUTABLE_NAME;RUN_TARGET_NAME;TOP_MODULE;LIBRARY" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;ELABORATE_ARGS;RUN_ARGS;FILE_SETS" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -192,6 +198,9 @@ function(vcs IP_LIB)
     socmake_allow_topological_sort(ON)
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__vcs_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;ELABORATE_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -395,6 +404,9 @@ function(__vcs_compile_lib IP_LIB)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__get_vcs_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -447,6 +459,9 @@ function(__get_vcs_search_lib_args IP_LIB)
     set(DPI_LIBS_ARGS ${dpi_libs_args} PARENT_SCOPE)
 endfunction()
 
+#[[[
+# To update
+#]]
 function(vcs_gen_sc_wrapper IP_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -546,6 +561,9 @@ function(vcs_gen_sc_wrapper IP_LIB)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 function(vcs_gen_hdl_wrapper SC_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "" ${ARGN})
     # Check for any unrecognized arguments
@@ -614,6 +632,9 @@ function(vcs_gen_hdl_wrapper SC_LIB)
 
 endfunction()
 
+#[[[
+# To update
+#]]
 function(__find_vcs_home OUTVAR)
     find_program(exec_path vcs REQUIRED)
     get_filename_component(bin_path "${exec_path}" DIRECTORY)
@@ -622,6 +643,9 @@ function(__find_vcs_home OUTVAR)
     set(${OUTVAR} ${vcs_home} PARENT_SCOPE)
 endfunction()
 
+#[[[
+# To update
+#]]
 macro(vcs_configure_cxx)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})
 
@@ -634,6 +658,9 @@ macro(vcs_configure_cxx)
     endif()
 endmacro()
 
+#[[[
+# To update
+#]]
 function(vcs_add_cxx_libs)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})
     # Check for any unrecognized arguments

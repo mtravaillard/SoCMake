@@ -1,3 +1,9 @@
+#[[[ @module peakrdl_topgen
+#]]
+
+#[[[
+# To update
+#]]
 function(peakrdl_topgen IP_LIB)
     # Parse keyword arguments
     cmake_parse_arguments(ARG "TMR" "OUTDIR;RENAME;INTF;RESET;OUT_LIST" "PARAMETERS" ${ARGN})

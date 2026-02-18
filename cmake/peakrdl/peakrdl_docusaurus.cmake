@@ -1,3 +1,9 @@
+#[[[ @module peakrdl_docusaurus
+#]]
+
+#[[[
+# To update
+#]]
 function(peakrdl_docusaurus IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;SIDEBAR_TEMPLATE;LOGO" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

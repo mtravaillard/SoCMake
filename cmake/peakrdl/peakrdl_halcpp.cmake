@@ -1,3 +1,6 @@
+#[[[ @module peakrdl_halcpp
+#]]
+
 #[[[
 # Create a target for invoking PeakRDL-halcpp on IP_LIB.
 #

@@ -1,3 +1,6 @@
+#[[[ @module peakrdl_regblock
+#]]
+
 #[[[
 # Create a target for invoking PeakRDL-regblock on IP_LIB.
 #

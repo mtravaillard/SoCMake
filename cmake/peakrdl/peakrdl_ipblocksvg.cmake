@@ -1,3 +1,6 @@
+#[[[ @module peakrdl_ipblocksvg
+#]]
+
 #[[[
 # Create a target for invoking PeakRDL-ipblocksvg on IP_LIB.
 #

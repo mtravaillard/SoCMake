@@ -1,3 +1,9 @@
+#[[[ @module fusesoc
+#]]
+
+#[[[
+# To update
+#]]
 function(add_ip_from_fusesoc CORE_FILE)
     cmake_parse_arguments(ARG "" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

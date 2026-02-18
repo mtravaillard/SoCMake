@@ -1,6 +1,9 @@
+#[[[ @module cocotb
+#]]
+
 include_guard(GLOBAL)
 
-# [[[
+#[[[
 # This function simulated the IP library with the cocotb library.
 #
 # The function is a wrapper around supported simulators by cocotb. It is based on the cocotb Makefiles.
@@ -34,7 +37,7 @@ include_guard(GLOBAL)
 # :type SV_COMPILE_ARGS: string
 # :keyword RUN_ARGS: Extra arguments to be passed to the simulation step.
 # :type RUN_ARGS: string
-# ]]]
+#]]
 function(cocotb IP_LIB)
     # Parse the function arguments
     cmake_parse_arguments(ARG "NO_RUN_TARGET;GUI" "OUTDIR;RUN_TARGET_NAME;TOP_MODULE;COCOTB_MODULE;COCOTB_TESTCASE;SIM;TIMESCALE" "PYTHONPATH;SV_COMPILE_ARGS;RUN_ARGS" ${ARGN})

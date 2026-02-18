@@ -1,3 +1,9 @@
+#[[[ @module ipxact
+#]]
+
+#[[[
+# To update
+#]]
 function(add_ip_from_ipxact COMP_XML)
     cmake_parse_arguments(ARG "GENERATE_ONLY" "IPXACT_SOURCE_DIR" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

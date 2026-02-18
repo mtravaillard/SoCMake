@@ -1,5 +1,10 @@
+#[[[ @module vhdl
+#]]
 include_guard(GLOBAL)
 
+#[[[
+# To update
+#]]
 function(vhdl_linter IP_LIB)
     cmake_parse_arguments(ARG "" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
