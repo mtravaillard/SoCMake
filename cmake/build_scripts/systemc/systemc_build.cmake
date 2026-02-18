@@ -1,4 +1,18 @@
+#[[[ @module systemc
+#]]
 
+#[[[
+# Build and install the SystemC library.
+# It might not build a new SystemC library, if one is found using find_package() cmake function.
+#
+# **Keyword Arguments**
+#
+# :keyword VERSION: Version of the SystemC library that need to be built.
+# :type VERSION: string
+# :keyword EXACT_VERSION: If EXACT_VERSION is set, if a SystemC library is already built but not in this version, it will build a new one.
+# :type EXACT_VERSION: bool
+# :keyword INSTALL_DIR: Path to the location where the library will be installed, by default it's set to ${PROJECT_BINARY_DIR}/systemc, unless if FETCHCONTENT_BASE_DIR is set.
+#]]
 function(systemc_build)
     cmake_parse_arguments(ARG "EXACT_VERSION" "VERSION;INSTALL_DIR" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
