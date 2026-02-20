@@ -1,9 +1,25 @@
-
 #[[[ @module systemrdl
 #]]
 
 #[[[
-# To update
+# Generate a VHDL register block and adds it to the IP library.
+#
+# Function expects that **IP_LIB** *INTERFACE_LIBRARY* has **SYSTEMRDL_SOURCES** property set
+# with a list of SystemRDL files to be used as inputs.
+#
+# :param IP_LIB: The target IP library.
+# :type IP_LIB: string
+#
+# **Keyword Arguments**
+#
+# :keyword OUTDIR: Path to the location where generated file will be stored, if not set, it's in ``${BINARY_DIR}/${IP_LIB}_${CMAKE_CURRENT_FUNCTION}``
+# :type OUTDIR: string
+# :keyword INTF: Interface to be used for the generated registers. By default, it's set to "ibus", "axi4l" (axi4-lite) is also supported.
+# :type INTF: string
+# :keyword TOP_ADDRMAP: 
+# :type TOP_ADDRMAP: string
+# :keyword ARGS: Arguments to be given to desyrdl tool.
+# :type ARGS: string
 #]]
 function(desyrdl IP_LIB)
     # Parse keyword arguments

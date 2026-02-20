@@ -4,7 +4,20 @@
 include_guard(GLOBAL)
 
 #[[[
-# To update
+# This function convert SystemVerilog files to Verilog files.
+#
+# It will take all the .sv files in ${IP_LIB} and convert them to verilog files, they will be stored in a new folder, which can be parametrized.
+# It's also possible to replace the files in case of flattening, using the ``REPLACE`` argument.
+#
+# :param IP_LIB: The target IP library.
+# :type IP_LIB: string
+#
+# **Keyword Arguments**
+#
+# :keyword OUTDIR: Path to the location where converted file will be stored, if not set, it's in ``${BINARY_DIR}/sv2v``
+# :type OUTDIR: string
+# :keyword REPLACE: Can be set if .sv files need to be replaced by the .v files in the flatten graph.
+# :type REPLACE: bool
 #]]
 function(sv2v IP_LIB)
     cmake_parse_arguments(ARG "REPLACE" "OUTDIR" "" ${ARGN})

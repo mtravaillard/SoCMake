@@ -2,7 +2,19 @@
 #]]
 
 #[[[
-# To update
+# Generate a vivado FPGA project and create a target to generate the bitstream.
+#
+# :param IP_LIB: target IP library.
+# :type IP_LIB: string
+#
+# **Keyword Arguments**
+#
+# :keyword TOP: Top-level module name. If not specified, the value of the ``IP_NAME`` target property is used.
+# :type TOP: string
+# :keyword VERILOG_DEFINES: Additional SV/V compilation flag to be passed to vivado project
+# :type VERILOG_DEFINES: 
+# :keyword OUTDIR: output directory in which the files will be generated, if ommited ${BINARY_DIR}/vivado will be used.
+# :type OUTDIR: string path
 #]]
 function(vivado IP_LIB)
     cmake_parse_arguments(ARG "" "TOP" "VERILOG_DEFINES" ${ARGN})

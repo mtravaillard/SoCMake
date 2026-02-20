@@ -2,7 +2,23 @@
 #]]
 
 #[[[
-# To update
+# This function can be used to add an ip by using it ipxact .xml file
+#
+# ``xmlstarlet`` or ``xsltproc`` will be used, depending on the one found on your system,
+# to extract the data coming from the .xml file.
+#
+# It will find the differents IPs, find the corresponding file and do the corresponding linking,
+# everything will be stored in a Config.cmake file.
+#
+# :param COMP_XML: Path to the ipxact .xml file.
+# :type COMP_XML: string
+#
+# **Keyword Arguments**
+#
+# :keyword GENERATE_ONLY: If set, no .cmake file will be generated, the IP will still be set anyway, to be used in a parent scope.
+# :type GENERATE_ONLY: bool
+# :keyword IPXACT_SOURCE_DIR: path to be set has ${ip_vendor}__${ip_library}__${ip_name}__${ip_version}_IPXACT_SOURCE_DIR, if this argument is used.
+# :type IPXACT_SOURCE_DIR: string
 #]]
 function(add_ip_from_ipxact COMP_XML)
     cmake_parse_arguments(ARG "GENERATE_ONLY" "IPXACT_SOURCE_DIR" "" ${ARGN})

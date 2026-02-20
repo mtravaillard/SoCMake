@@ -17,25 +17,25 @@ include("${CMAKE_CURRENT_LIST_DIR}//utils/file_paths.cmake")
 #
 # This function can be used in FULL and SHORT form:
 # Full form:
-# ```
-# add_ip(ip
-#     VENDOR vendor
-#     LIBRARY lib
-#     VERSION 1.2.3
-#     DESCRIPTION "This is a sample IP"
-#     )
-# ```
+# ::
+#   add_ip(ip
+#      VENDOR vendor
+#      LIBRARY lib
+#      VERSION 1.2.3
+#      DESCRIPTION "This is a sample IP"
+#      )
+# 
 # In full form it is possible to ommit VENDOR, LIBRARY and VERSION, DESCRIPTION, although it is not recommended.
 #
 # Ommiting them all would have following signature:
-# ```
-# add_ip(ip2)
-# ```
+# ::
+#   add_ip(ip2)
+# 
 #
 # Short form:
-# ```
-# add_ip(vendor2::lib2::ip2::1.2.2)
-# ```
+# ::
+#   add_ip(vendor2::lib2::ip2::1.2.2)
+# 
 # In short form only the full VLNV format is accepted
 #
 # :param IP_NAME: The name of the IP.
@@ -516,7 +516,9 @@ function(get_ip_include_directories OUTVAR IP_LIB LANGUAGE)
 endfunction()
 
 #[[[
-# To update
+# This fonctions is used by the next function, to compare available version of IPs with the versions wanted.
+#
+# The allowed comparisons are ==, >=, >, <=, <, !=
 #]]
 function(__compare_version RESULT COMPARE_LHS RELATION COMPARE_RHS)
 
@@ -544,7 +546,10 @@ function(__compare_version RESULT COMPARE_LHS RELATION COMPARE_RHS)
 endfunction()
 
 #[[[
-# To update
+# This function is used by ``ip_link``, it checks the conditions for version.
+#
+# It will check if condition needs to be checked. If it does,
+# It will strip the `IP_LIB` value to extract the VLN value and will return it.
 #]]
 function(__ip_link_check_version OUT_IP_WO_VERSION IP_LIB)
     string(REPLACE " " "" ip_lib_str "${IP_LIB}")
@@ -592,10 +597,12 @@ endfunction()
 # as a list after the parameters and the keyword.
 #
 # It is also allowed to pass version conditions to be checked as following:
-#  ```
-# ip_link(v::l::ip1::1.1.1
-#     "v::l::ip2 >= 1.0.4, <=2.0.0")
-#  ```
+#
+# ::
+#
+#   ip_link(v::l::ip1::1.1.1
+#          "v::l::ip2 >= 1.0.4, <=2.0.0")
+#
 # If all the comparisons are not satisfied, FATAL_ERROR is issued.
 # Allowed comparisons are ==, >=, >, <=, <
 #
@@ -857,7 +864,12 @@ function(socmake_add_languages)
 endfunction()
 
 #[[[
-# To update
+# This function return a list of the supported language by your SoCMake environnement.
+#
+# This means, the langauges initially supported by SoCMake and the one that have been added using ``socmake_add_languages()``.
+#
+# :param OUTVAR: Variable in which to store the supported languages
+# :type OUTVAR: list[string]
 #]]
 function(get_socmake_languages OUTVAR)
     get_property(additional_languages GLOBAL PROPERTY SOCMAKE_ADDITIONAL_LANGUAGES)
@@ -945,9 +957,12 @@ function(ip_find_and_link IP_LIB)
 endfunction()
 
 #[[[
-# To Update
+# This function is an optimization to disable graph flattening too often in EDA tool functions.
 #
-# Optimization to disable graph flattening too often in EDA tool functions
+# The flattening is done using ``flatten_graph``, an SoCMake function and a variable is set to disallow further flattening, made by EDA tool.
+#
+# :param IP_LIB: the name of the IP library to flatten.
+# :type IP_LIB: string
 #]]
 function(flatten_graph_and_disallow_flattening IP_LIB)
     get_ip_links(ips ${IP_LIB})
@@ -959,14 +974,21 @@ function(flatten_graph_and_disallow_flattening IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function can be used to allow or disallow flattening by setting ``STATE`` to ON or OFF.
+#
+# :param STATE: ON to allow it, OFF to disallow it.
+# :type STATE: bool
 #]]
 function(socmake_allow_topological_sort STATE)
     set_property(GLOBAL PROPERTY SOCMAKE_ALLOW_TOPOLOGICAL_SORT ${STATE})
 endfunction()
 
 #[[[
-# To update
+# This function return the value of ``SOCMAKE_ALLOW_TOPOLOGICAL_SORT``, the variable used to allow or disallow flattening.
+# By default, it's set to ON.
+#
+# :param OUTVAR: Variable that will store the value of ``SOCMAKE_ALLOW_TOPOLOGICAL_SORT``.
+# :type OUTVAR: bool
 #]]
 function(socmake_get_topological_sort_state OUTVAR)
     get_property(state GLOBAL PROPERTY SOCMAKE_ALLOW_TOPOLOGICAL_SORT)
@@ -977,7 +999,10 @@ function(socmake_get_topological_sort_state OUTVAR)
 endfunction()
 
 #[[[
-# To update
+# As the name of this function say, it will look at ``SOCMAKE_ALLOW_TOPOLOGICAL_SORT`` value and proceed to flattening if allowed.
+#
+# :param IP_LIB: the name of the IP library to flatten.
+# :type IP_LIB: string
 #]]
 function(flatten_graph_if_allowed IP_LIB)
     socmake_get_topological_sort_state(state)

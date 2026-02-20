@@ -2,7 +2,23 @@
 #]]
 
 #[[[
-# To update
+# Create a target for invoking PeakRDL-docusaurus on IP_LIB.
+#
+# PeakRDL-docusaurus generates files for documentation with Docusaurus. PeakRDL-docusaurus is an internal CERN tool.
+#
+# Refer to the internal documentation for more information.
+#
+# :param IP_LIB: RTL interface library, it needs to have SYSTEMRDL_SOURCES property set with a list of SystemRDL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword OUTDIR: output directory in which the files will be generated, if ommited ${BINARY_DIR}/docusaurus will be used.
+# :type OUTDIR: string path
+# :keyword SIDEBAR_TEMPLATE: sidebar template to give to peakrdl for generating the Docusaurus documentation.
+# :type SIDEBAR_TEMPLATE: string
+# :keyword LOGO: Logo to give to peakrdl for generating the Docusaurus documentation.
+# :type LOGO: string
 #]]
 function(peakrdl_docusaurus IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;SIDEBAR_TEMPLATE;LOGO" "" ${ARGN})

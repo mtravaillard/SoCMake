@@ -2,7 +2,31 @@
 #]]
 
 #[[[
-# To update
+# Create a target for invoking PeakRDL-topgen on IP_LIB.
+#
+# PeakRDL-topgen compile and wrap SystenRDL into a SystemVerilog top file. PeakRDL-topgen is an internal CERN tool.
+#
+# Refer to the internal documentation for more information.
+#
+# :param IP_LIB: RTL interface library, it needs to have SYSTEMRDL_SOURCES property set with a list of SystemRDL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword TMR: if set, it will apply triple modular redundancy on the design.
+# :type TMR: bool
+# :keyword OUTDIR: output directory in which the files will be generated, if ommited ${BINARY_DIR}/halcpp will be used.
+# :type OUTDIR: string path
+# :keyword RENAME: change the name of the IP.
+# :type RENAME: string
+# :keyword INTF: Interface to be used for on-chip communicatio, by default, it use apb3.
+# :type INTF: string
+# :keyword RESET: Change reset behaviour, the default reset is active-high and synchronous.
+# :type RESET: string
+# :keyword PARAMETERS: Parameters for the top level generation
+# :type PARAMETERS: string
+# :keyword OUT_LIST: Set the generated sources to the output variable
+# :type OUT_LIST: list[string]
 #]]
 function(peakrdl_topgen IP_LIB)
     # Parse keyword arguments
