@@ -4,7 +4,10 @@
 include_guard(GLOBAL)
 
 #[[[
-# To Update
+# Macro to print all the item in a given list.
+#
+# :param LIST: list that need to be printed.
+# :type LIST: list[string]
 #]]
 macro(print_list LIST)
     foreach(item ${LIST})

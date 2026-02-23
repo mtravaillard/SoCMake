@@ -2,7 +2,26 @@
 #]]
 
 #[[[
-# To Update
+# This function use vhier, it is used to return all files in a verilog hierarchy using Verilog::Netlist.
+# It creates a Makefile target to run vhier command.
+#
+# More information on vhier can be found on vhier man page.
+#
+# :param IP_LIB: target IP library.
+# :type IP_LIB: string
+#
+# **Keyword Arguments**
+#
+# :keyword TOP_MODULE: if set, add --top-module ${IP_NAME} flags, that will start looking at the hierarchy by starting at the given top modules.
+# :type TOP_MODULE: bool
+# :keyword XML: if set, add --xml flags, that creates an output in xml format.
+# :type XML: bool
+# :keyword FILES: if set, add --module-files flags, that shows all module filenames, in a top-down order.
+# :type FILES: bool
+# :keyword MODULES: if set, add --modules flag, that shows all module names.
+# :type MODULES: bool
+# :keyword FOREST: if set, add --forest flags, that shows an "ASCII-art" hierarchy tree of all cells.
+# :type FOREST: bool
 #]]
 function(vhier IP_LIB)
     cmake_parse_arguments(ARG "XML;FILES;MODULES;FOREST" "TOP_MODULE" "" ${ARGN})

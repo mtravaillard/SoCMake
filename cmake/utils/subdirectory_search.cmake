@@ -1,11 +1,16 @@
-#[[[ @module print_list
+#[[[ @module subdirectory_search
 #]]
 
 include_guard(GLOBAL)
 
 # https://stackoverflow.com/questions/7787823/cmake-how-to-get-the-name-of-all-subdirectories-of-a-directory
 #[[[
-# To Update
+# This macro is used to get the name of all the subdirectories of a directory, inspired by `this <https://stackoverflow.com/questions/7787823/cmake-how-to-get-the-name-of-all-subdirectories-of-a-directory>`_
+#
+# :param output_var: list that need to be printed.
+# :type output_var: list[string]
+# :param dir: Path to the directory
+# :type dir: string
 #]]
 macro(SUBDIRLIST output_var dir)
   file(GLOB children RELATIVE ${dir} ${dir}/*)
@@ -19,7 +24,14 @@ macro(SUBDIRLIST output_var dir)
 endmacro()
 
 #[[[
-# To Update
+# This macro can be used to create a filtered list, by selecting patterns to exclude some subdirectories.
+#
+# :param output_var: list that need to be printed.
+# :type output_var: list[string]
+# :param dir: Path to the directory
+# :type dir: string
+# :param dir: Patterns to exclude subdirectories
+# :type dir: list[string]
 #]]
 macro(SUBDIRLIST_EXCLUDE output_var dir excluded_patterns)
     # Get all subdirectories

@@ -4,7 +4,10 @@
 include_guard(GLOBAL)
 
 #[[[
-# To Update
+# This function can be use to get all Makefiles targets. 
+#
+# :param OUTVAR: Name of the output variable, a list containing all the Makefiles target.
+# :type OUTVAR: list[string]
 #]]
 function(get_all_targets OUTVAR)
     set(targets)
@@ -13,7 +16,12 @@ function(get_all_targets OUTVAR)
 endfunction()
 
 #[[[
-# To Update
+# This function, looks recursively in a directory and it subdirectories, to find new target, then it appends them to the target list.
+#
+# :param targets: List containing all the targets found. 
+# :type targets: list[string]
+# :param dir: Path to a directory
+# :type dir: string
 #]]
 macro(__get_all_targets_recursive targets dir)
     get_property(subdirectories DIRECTORY ${dir} PROPERTY SUBDIRECTORIES)
@@ -26,7 +34,10 @@ macro(__get_all_targets_recursive targets dir)
 endmacro()
 
 #[[[
-# To Update
+# This function can be used to get all the IP that are associated with a Makefile target.
+#
+# :param OUTVAR: Name of the output variable, a list containing all the targeted IPs.
+# :type OUTVAR: list[string]
 #]]
 function(get_all_ips OUTVAR)
     get_all_targets(ALL_TARGETS)

@@ -2,7 +2,21 @@
 #]]
 
 #[[[
-# To Update
+# This functions can be used to create a a custom group of selected items, with a selected types. It will mainy be called by other function in this file, to create groups.
+#
+# One of the argument must be used to fill the group, but, it's not possible to use the argument Pattern and List at the same time.
+#
+# :param GROUP_NAME: Name of the group that needs to be created.
+# :type GROUP_NAME: string
+# :param TYPE: Type of group, can be TARGET, IP or OPTION.
+# :type TYPE: string
+#
+# **Keyword Arguments**
+#
+# :keyword PATTERN: if a pattern is given, the item in the group list will be filtered and they must have the pattern to be included 
+# :type PATTERN: string
+# :keyword LIST: if a list is given, the item in the group list are the one given in the list.
+# :type LIST: list[string]
 #]]
 function(_group_custom_items GROUP_NAME TYPE)
     cmake_parse_arguments(ARG "" "PATTERN" "LIST" ${ARGN})
@@ -48,28 +62,63 @@ function(_group_custom_items GROUP_NAME TYPE)
 endfunction()
 
 #[[[
-# To Update
+# This function can be used to create a custom group for targets. 
+#
+# :param GROUP_NAME: Name of the group that needs to be created.
+# :type GROUP_NAME: string
+#
+# **Keyword Arguments**
+#
+# :keyword PATTERN: if a pattern is given, the targets in the group list will be filtered and they must have the pattern to be included 
+# :type PATTERN: string
+# :keyword LIST: if a list is given, the target in the group list are the one given in the list.
+# :type LIST: list[string]
 #]]
 function(group_custom_targets GROUP_NAME)
     _group_custom_items(${GROUP_NAME} TARGET ${ARGN})
 endfunction()
 
 #[[[
-# To Update
+# This function can be used to create a custom group for IPs.
+#
+# :param GROUP_NAME: Name of the group that needs to be created.
+# :type GROUP_NAME: string
+#
+# **Keyword Arguments**
+#
+# :keyword PATTERN: if a pattern is given, the IPs in the group list will be filtered and they must have the pattern to be included 
+# :type PATTERN: string
+# :keyword LIST: if a list is given, the IPs in the group list are the one given in the list.
+# :type LIST: list[string]
 #]]
 function(group_custom_ips GROUP_NAME)
     _group_custom_items(${GROUP_NAME} IP ${ARGN})
 endfunction()
 
 #[[[
-# To Update
+# This function can be used to create a custom group for options.
+#
+# :param GROUP_NAME: Name of the group that needs to be created.
+# :type GROUP_NAME: string
+#
+# **Keyword Arguments**
+#
+# :keyword PATTERN: if a pattern is given, the options in the group list will be filtered and they must have the pattern to be included 
+# :type PATTERN: string
+# :keyword LIST: if a list is given, the options in the group list are the one given in the list.
+# :type LIST: list[string]
 #]]
 function(group_custom_options GROUP_NAME)
     _group_custom_items(${GROUP_NAME} OPTION ${ARGN})
 endfunction()
 
 #[[[
-# To Update
+# This function can be used to find all the target belonging to a given group. The output list will be stored in the OUTVAR argument.
+#
+# :param OUTVAR: List containing the targets found.
+# :type OUTVAR: list[string]
+# :param GROUP_NAME: Name of the group to get the target from.
+# :type GROUP_NAME: string
 #]]
 function(get_all_targets_of_group OUTVAR GROUP_NAME)
     get_all_targets(all_targets)

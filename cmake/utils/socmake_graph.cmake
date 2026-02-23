@@ -4,11 +4,10 @@
 include_guard(GLOBAL)
 
 #[[[
-# To Update
+# this function is the internal graph flattening functions
 #
-# ========================================================== #
-# ======== Internal graph flattening functions ============= #
-# ========================================================== #
+# :param NODE: node to be flattened
+# :type NODE: node
 #]]
 function(flatten_graph NODE)
     alias_dereference(NODE ${NODE})
@@ -36,11 +35,14 @@ function(flatten_graph NODE)
 endfunction()
 
 #[[[
-# To Update
+# This function is a recursive DFS topological sort
 #
-# ------------------------------------------------------------------ #
-# Recursive DFS topological sort
-# ------------------------------------------------------------------ #
+# Will return 0 if the node doesn't have the TARGET keyword set or if it has already been processed, otherwise, it will return 1 after processing it.
+#
+# :param NODE: node to be processed
+# :type NODE: node
+# :param RET: value returned by this function
+# :type RET: integer
 #]]
 function(__dfs_topo NODE RET)
     alias_dereference(NODE ${NODE})
@@ -96,11 +98,14 @@ function(__dfs_topo NODE RET)
 endfunction()
 
 #[[[
-# To Update
+# Function to compare 2 list, will return 1 if they are equal, otherwise, will return -1.
 #
-# ------------------------------------------------------------------ #
-# Utility: compare lists (unchanged)
-# ------------------------------------------------------------------ #
+# :param L1: 1st list
+# :type L1: list
+# :param L2: 2nd list
+# :type L2: list
+# :param RET: returned value for the comparison 
+# :type RET: integer
 #]]
 function(compare_lists L1 L2 RET)
     set(_l1 ${L1})
