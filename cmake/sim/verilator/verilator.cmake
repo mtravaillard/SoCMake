@@ -47,9 +47,7 @@ function(verilator IP_LIB)
         # Ensure CMP0144 is set before find_package to get rid of warning
         cmake_policy(PUSH)
         cmake_policy(SET CMP0144 NEW)
-        find_package(verilator REQUIRED
-            HINTS ${VERISC_HOME}/open/* $ENV{VERISC_HOME}/open/*
-            )
+        find_package(verilator REQUIRED)
         set(VERILATOR_HOME "${verilator_DIR}/../../")
         cmake_policy(POP)
     endif()
@@ -156,9 +154,7 @@ function(verilator IP_LIB)
 
     if(ARG_SYSTEMC)
         if(NOT SYSTEMC_HOME)
-            find_package(SystemCLanguage REQUIRED
-                HINTS ${VERISC_HOME}/open/* $ENV{VERISC_HOME}/open/*
-                )
+            find_package(SystemCLanguage REQUIRED)
             set(SYSTEMC_HOME "${SystemCLanguage_DIR}/../../../")
         endif()
     endif()

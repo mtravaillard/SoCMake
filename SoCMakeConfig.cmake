@@ -52,9 +52,6 @@ include("${CMAKE_CURRENT_LIST_DIR}/cmake/sim/xilinx/vivado_sim.cmake")
 # ----- FC4SC -------
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/sim/fc4sc/fc4sc_merge_coverage.cmake")
 
-# ----- VeriSC --------
-include("${CMAKE_CURRENT_LIST_DIR}/cmake/sim/verisc/verisc_install.cmake")
-
 # ----- Cocotb --------
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/sim/cocotb/cocotb.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/sim/cocotb/add_cocotb_tests.cmake")
