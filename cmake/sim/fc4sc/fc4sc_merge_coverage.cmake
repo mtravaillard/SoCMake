@@ -7,7 +7,7 @@ include_guard(GLOBAL)
 # This function use fc4sc to merge already existing coverages files in the ``DIRECTORY`` directory (function's argument).
 #
 # :param DIRECTORY: Directory containing coverage informations 
-# :type DIRECTORY:path string
+# :type DIRECTORY: path string
 #
 # **Keyword Arguments**
 #
