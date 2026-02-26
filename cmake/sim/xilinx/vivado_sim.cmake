@@ -4,7 +4,35 @@
 include_guard(GLOBAL)
 
 #[[[
-# To update
+# Create a target for invoking Vivado (compilation, elaboration, and simulation) on IP_LIB.
+#
+# It will create a target **run_<IP_LIB>_vivado** that will compile, elaborate, and simulate the IP_LIB design.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of System Verilog or VHDL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword NO_RUN_TARGET: Do not create a run target.
+# :type NO_RUN_TARGET: bool
+# :keyword GUI: Run simulation in GUI mode.
+# :type GUI: bool
+# :keyword RUN_TARGET_NAME: Replace the default name of the run target.
+# :type RUN_TARGET_NAME: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
+# :keyword XVLOG_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
+# :type XVLOG_ARGS: string
+# :keyword XVHDL_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type XVHDL_ARGS: string
+# :keyword XELAB_ARGS: Extra arguments to be passed to the elaboration step.
+# :type XELAB_ARGS: string
+# :keyword XSIM_ARGS: Extra arguments to be passed to the simulation step.
+# :type XSIM_ARGS: string
+# :keyword RUN_ARGS: Extra arguments to be passed to the simulation step.
+# :type RUN_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(vivado_sim IP_LIB)
     cmake_parse_arguments(ARG "NO_RUN_TARGET;GUI" "RUN_TARGET_NAME;TOP_MODULE" "XVLOG_ARGS;XVHDL_ARGS;XELAB_ARGS;XSIM_ARGS;RUN_ARGS;FILE_SETS" ${ARGN})
@@ -139,7 +167,23 @@ function(vivado_sim IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function is called by ``vivado_sim``, it shouldn't be used directly in a cmake file.
+#
+# It will create an intermediary target to compile VDHL and SystemVerilog/Verilog file, using xvhdl and xvlog.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of System Verilog or VHDL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword OUTDIR: Output directory.
+# :type OUTDIR: string
+# :keyword XVLOG_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
+# :type XVLOG_ARGS: string
+# :keyword XVHDL_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type XVHDL_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(__vivado_sim_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR" "XVLOG_ARGS;XVHDL_ARGS;FILE_SETS" ${ARGN})
@@ -272,7 +316,19 @@ function(__vivado_sim_compile_lib IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This macro is used to configure the C and CXX compiler to the one used by the tool.
+# In this specific case, it won't change anything for the compiler use but will add some useful informations to IP_LIB.
+#
+# The only supported library by this function is DPI-C, it can be used as done in the following example :
+# 
+# .. code-block:: cmake
+#
+#    vivado_sim_configure_cxx(LIBRARIES DPI-C)
+#
+# **Keyword Arguments**
+#
+# :keyword LIBRARIES: Libraries that needs to be added.
+# :type LIBRARIES: list[string]
 #]]
 macro(vivado_sim_configure_cxx)
     cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
@@ -287,7 +343,16 @@ macro(vivado_sim_configure_cxx)
 endmacro()
 
 #[[[
-# To update
+# This function is called by the ``vivado_sim_configure_cxx`` macro, you shouldn't use it directly.
+#
+# It will add the needed information to IP_LIB and add some flags for the compilation and linking.
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bitness.
+# :type 32BIT: bool
+# :keyword LIBRARIES: libraries that needs to be added, possible choice are DPI-C only for now.
+# :type LIBRARIES: list[string]
 #]]
 function(vivado_sim_add_cxx_libs)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})

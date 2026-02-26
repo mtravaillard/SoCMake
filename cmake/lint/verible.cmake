@@ -17,7 +17,7 @@
 #
 # Function will create targets for linting or formatting depending on passed option
 #
-# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of System Verilog files.
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog files.
 # :type IP_LIB: INTERFACE_LIBRARY
 #
 # **Keyword Arguments**

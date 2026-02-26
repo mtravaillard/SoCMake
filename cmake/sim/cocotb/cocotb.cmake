@@ -33,7 +33,7 @@ include_guard(GLOBAL)
 # :type TIMESCALE: string
 # :keyword PYTHONPATH: List of paths to be added to the PYTHONPATH environment variable to include python modules needed for the simulation.
 # :type PYTHONPATH: string
-# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the System Verilog / Verilog compilation step.
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
 # :type SV_COMPILE_ARGS: string
 # :keyword RUN_ARGS: Extra arguments to be passed to the simulation step.
 # :type RUN_ARGS: string

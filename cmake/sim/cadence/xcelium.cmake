@@ -8,7 +8,7 @@ include_guard(GLOBAL)
 #
 # It will create a target **run_<IP_LIB>_xcelium** that will compile, elaborate, and simulate the IP_LIB design.
 #
-# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of System Verilog files.
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or VHDL files.
 # :type IP_LIB: INTERFACE_LIBRARY
 #
 # **Keyword Arguments**
@@ -31,7 +31,7 @@ include_guard(GLOBAL)
 # :type COMPILE_ARGS: string
 # :keyword XRUN_COMPILE_ARGS: Extra arguments to be passed to the xrun -compile command
 # :type XRUN_COMPILE_ARGS: string
-# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the System Verilog / Verilog compilation step.
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
 # :type SV_COMPILE_ARGS: string
 # :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
 # :type VHDL_COMPILE_ARGS: string
@@ -39,7 +39,7 @@ include_guard(GLOBAL)
 # :type ELABORATE_ARGS: string
 # :keyword RUN_ARGS: Extra arguments to be passed to the simulation step.
 # :type RUN_ARGS: string
-# :keyword FILE_SETS: Specify list of File sets to retrieve the sources  from
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
 # :type FILE_SETS: list[string]
 #]]
 function(xcelium IP_LIB)
@@ -228,7 +228,31 @@ function(xcelium IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function is called by ``xcelium``, it shouldn't be used directly in a cmake file.
+#
+# It will create an intermediary target to compile VDHL and SystemVerilog/Verilog file, using ``xrun -compile``.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or VDHL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword OUTDIR: Output directory for the Xcelium compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
+# :keyword COMPILE_ARGS: Extra arguments to be passed to the compilation step (C, C++).
+# :type COMPILE_ARGS: string
+# :keyword XRUN_COMPILE_ARGS: Extra arguments to be passed to the xrun -compile command
+# :type XRUN_COMPILE_ARGS: string
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
+# :type SV_COMPILE_ARGS: string
+# :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type VHDL_COMPILE_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(__xcelium_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY;TOP_MODULE" "COMPILE_ARGS;XRUN_COMPILE_ARGS;SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
@@ -450,7 +474,19 @@ function(__xcelium_compile_lib IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function is called by ``xcelium``, it shouldn't be used directly in a cmake file.
+#
+# It will set values for the HDL and DPI library arguments that will be used for compilation, elaboration and simulation.
+#
+# :param IP_LIB: IP library
+# :type IP_LIB: string
+#
+# **Keyword Arguments**
+#
+# :keyword OUTDIR: Output directory for the Xcelium compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
 #]]
 function(__get_xcelium_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
@@ -477,7 +513,7 @@ function(__get_xcelium_search_lib_args IP_LIB)
             __xcelium_default_library(__comp_lib_name ${lib})
 
             set(lib_outdir ${ARG_OUTDIR}/xcelium.d/${__comp_lib_name})
-            # Append current library outdhdl_libs_argsir to list of search directories
+            # Append current library outdir to list of search directories
             if(NOT ${lib_outdir} IN_LIST hdl_libs_args)
                 list(APPEND hdl_libs_args -reflib ${lib_outdir})
             endif()
@@ -489,7 +525,10 @@ function(__get_xcelium_search_lib_args IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function allows to find the path to xcelium home directory and to store it in a given variable.
+#
+# :param OUTVAR: Name of the variable in which xcelium_home will be stored
+# :type OUTVAR: string
 #]]
 function(__find_xcelium_home OUTVAR)
     find_program(exec_path xrun REQUIRED)
@@ -500,7 +539,29 @@ function(__find_xcelium_home OUTVAR)
 endfunction()
 
 #[[[
-# To update
+# This function create a target to generate a SystemC wrapper for the IP library, with Xcelium xmshell, if SystemVerilog or Verilog files are in the IP library.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or Verilog files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bit compilation and simulation.
+# :type 32BIT: bool
+# :keyword QUIET: Disable output for informative messages
+# :type QUIET: bool
+# :keyword OUTDIR: Output directory for the Xcelium compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
+# :type SV_COMPILE_ARGS: string
+# :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type VHDL_COMPILE_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(xcelium_gen_sc_wrapper IP_LIB)
     cmake_parse_arguments(ARG "32BIT;QUIET" "OUTDIR;LIBRARY;TOP_MODULE" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
@@ -602,7 +663,21 @@ function(xcelium_gen_sc_wrapper IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function create a target to generate a Verilog wrapper file from a SystemC library with Xcelium xmshell.
+#
+# :param SC_LIB: Name of an existing CMake target representing the SystemC library.
+# :type SC_LIB: target
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32-bit Xcelium tools instead of the default 64-bit mode.
+# :type 32BIT: bool
+# :keyword OUTDIR: Output directory for the Xcelium compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: Replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
 #]]
 function(xcelium_gen_hdl_wrapper SC_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "" ${ARGN})
@@ -673,7 +748,18 @@ function(xcelium_gen_hdl_wrapper SC_LIB)
 endfunction()
 
 #[[[
-# To update
+# This macro is used to configure the C and CXX compiler to the one used by the tool.
+#
+# It can also be used to add some libraries, such as SystemC and DPI-C in this case, for example if you want to use dpi, you should use this macro like this :
+# 
+# .. code-block:: cmake
+#
+#    xcelium_configure_cxx(LIBRARIES DPI-C)
+#
+# **Keyword Arguments**
+#
+# :keyword LIBRARIES: Libraries that needs to be added.
+# :type LIBRARIES: list[string]
 #]]
 macro(xcelium_configure_cxx)
     cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
@@ -688,7 +774,16 @@ macro(xcelium_configure_cxx)
 endmacro()
 
 #[[[
-# To update
+# This function is called by the ``xcelium_configure_cxx`` macro, you shouldn't use it directly.
+#
+# It will add the needed information to IP_LIB and add some flags for the compilation and linking.
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bitness.
+# :type 32BIT: bool
+# :keyword LIBRARIES: libraries that needs to be added, possible choice is SystemC or DPI-C
+# :type LIBRARIES: list[string]
 #]]
 function(xcelium_add_cxx_libs)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})
@@ -755,7 +850,19 @@ function(xcelium_add_cxx_libs)
 endfunction()
 
 #[[[
-# To update
+# Determine the default Xcelium compilation library name for a given IP_LIB.
+#
+# It will resolves the logical compilation library associated with it.
+#
+# :param OUT_LIB: Name of the variable that will receive the resolved library name.
+# :type OUT_LIB: string (output variable)
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or VHDL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword LIBRARY: Specify the compilation library name to use.
+# :type LIBRARY: string
 #]]
 function(__xcelium_default_library OUT_LIB IP_LIB)
     cmake_parse_arguments(ARG "" "LIBRARY" "" ${ARGN})

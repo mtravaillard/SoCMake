@@ -2,7 +2,12 @@
 #]]
 
 #[[[
-# To update
+# This function is used to add cocotb tests, using CTests functions, to do automated check.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog files.
+# :type IP_LIB: INTERFACE_LIBRARY
+# :param DIRECTORY:
+# :type DIRECTORY: path string
 #]]
 function(add_cocotb_tests IP_LIB DIRECTORY)
     include("${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../utils/subdirectory_search.cmake")

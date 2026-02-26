@@ -2,7 +2,57 @@
 #]]
 
 #[[[
-# To update
+# Create a target for invoking verilator (compilation, elaboration, and simulation) on IP_LIB.
+#
+# It will create a target **run_<IP_LIB>_verilator** that will compile, elaborate, and simulate the IP_LIB design.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword COVERAGE: Enable code coverage during compilation and simulation.
+# :type COVERAGE: bool
+# :keyword TRACE: Enable waveform tracing.
+# :type TRACE: bool
+# :keyword TRACE_FST: Enable FST waveform tracing format.
+# :type TRACE_FST: bool
+# :keyword SYSTEMC: Enable SystemC support.
+# :type SYSTEMC: bool
+# :keyword TRACE_STRUCTS: Enable tracing of SystemVerilog structs.
+# :type TRACE_STRUCTS: bool
+# :keyword MAIN: Specify a custom C++ main file.
+# :type MAIN: string
+# :keyword TIMING: Enable timing support in simulation.
+# :type TIMING: bool
+# :keyword NO_RUN_TARGET: Do not create a run target.
+# :type NO_RUN_TARGET: bool
+# :keyword PREFIX: Prefix name used for generated output files and targets.
+# :type PREFIX: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
+# :keyword THREADS: Number of threads to be used during compilation or simulation.
+# :type THREADS: int
+# :keyword TRACE_THREADS: Enable waveform tracing per thread.
+# :type TRACE_THREADS: bool
+# :keyword DIRECTORY: Output directory for generated build and simulation files.
+# :type DIRECTORY: string
+# :keyword EXECUTABLE_NAME: Replace the default name of the generated executable target.
+# :type EXECUTABLE_NAME: string
+# :keyword RUN_TARGET_NAME: Replace the default name of the run target.
+# :type RUN_TARGET_NAME: string
+# :keyword VERILATOR_ARGS: Extra arguments to be passed to the Verilator invocation.
+# :type VERILATOR_ARGS: string
+# :keyword OPT_SLOW: Enable slow but optimized compilation mode.
+# :type OPT_SLOW: bool
+# :keyword OPT_FAST: Enable fast compilation optimization mode.
+# :type OPT_FAST: bool
+# :keyword OPT_GLOBAL: Enable global optimization mode.
+# :type OPT_GLOBAL: bool
+# :keyword RUN_ARGS: Extra arguments to be passed to the simulation executable.
+# :type RUN_ARGS: string
+# :keyword FILE_SETS: Specify list of file sets to retrieve the sources from.
+# :type FILE_SETS: list[string]
 #]]
 function(verilator IP_LIB)
     set(OPTIONS "COVERAGE;TRACE;TRACE_FST;SYSTEMC;TRACE_STRUCTS;MAIN;TIMING;NO_RUN_TARGET")
@@ -299,7 +349,19 @@ function(verilator IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This macro is used to configure the C and CXX compiler to the one used by the tool.
+# In this specific case, it won't change anything for the compiler use but will add some useful informations to IP_LIB.
+#
+# The only supported library by this function is DPI-C, it can be used as done in the following example :
+# 
+# .. code-block:: cmake
+#
+#    verilator_configure_cxx(LIBRARIES DPI-C)
+#
+# **Keyword Arguments**
+#
+# :keyword LIBRARIES: Libraries that needs to be added.
+# :type LIBRARIES: list[string]
 #]]
 macro(verilator_configure_cxx)
     cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})
@@ -309,7 +371,16 @@ macro(verilator_configure_cxx)
 endmacro()
 
 #[[[
-# To update
+# This function is called by the ``verilator_configure_cxx`` macro, you shouldn't use it directly.
+#
+# It will add the needed information to IP_LIB and add some flags for the compilation and linking.
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bitness.
+# :type 32BIT: bool
+# :keyword LIBRARIES: libraries that needs to be added, possible choice are DPI-C only for now.
+# :type LIBRARIES: list[string]
 #]]
 function(verilator_add_cxx_libs)
     cmake_parse_arguments(ARG "" "" "LIBRARIES" ${ARGN})

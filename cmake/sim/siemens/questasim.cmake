@@ -4,7 +4,39 @@
 include_guard(GLOBAL)
 
 #[[[
-# To update
+# Create a target for invoking Questasim (compilation, elaboration, and simulation) on IP_LIB.
+#
+# It will create a target **run_<IP_LIB>_questasim** that will compile, elaborate, and simulate the IP_LIB design.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or VHDL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword NO_RUN_TARGET: Do not create a run target.
+# :type NO_RUN_TARGET: bool
+# :keyword GUI: Run simulation in GUI mode.
+# :type GUI: bool
+# :keyword GUI_VISUALIZER: Run simulation in GUI, with Visualizer.
+# :type GUI_VISUALIZER: bool
+# :keyword 32BIT: Use 32 bit compilation and simulation.
+# :type 32BIT: bool
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
+# :keyword OUTDIR: Output directory for the Questasim compilation and simulation.
+# :type OUTDIR: string
+# :keyword RUN_TARGET_NAME: Replace the default name of the run target.
+# :type RUN_TARGET_NAME: string
+# :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type VHDL_COMPILE_ARGS: string
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
+# :type SV_COMPILE_ARGS: string
+# :keyword RUN_ARGS: Extra arguments to be passed to the simulation step.
+# :type RUN_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(questasim IP_LIB)
     cmake_parse_arguments(ARG "NO_RUN_TARGET;QUIET;GUI;GUI_VISUALIZER;32BIT" "LIBRARY;TOP_MODULE;OUTDIR;RUN_TARGET_NAME" "VHDL_COMPILE_ARGS;SV_COMPILE_ARGS;RUN_ARGS;FILE_SETS" ${ARGN})
@@ -197,7 +229,29 @@ function(questasim IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function is called by ``questasim``, it shouldn't be used directly in a cmake file.
+#
+# It will create an intermediary target to compile VDHL and SystemVerilog/Verilog file, using vcom and vlog. It will also compile using sccom if SystemC is a boundary library.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or VDHL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword QUIET: Disable output for informative messages
+# :type QUIET: bool
+# :keyword 32BIT: Use 32 bit compilation and simulation.
+# :type 32BIT: bool
+# :keyword OUTDIR: Output directory for the Questa compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
+# :type SV_COMPILE_ARGS: string
+# :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type VHDL_COMPILE_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(__questasim_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "QUIET;32BIT" "OUTDIR;LIBRARY" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
@@ -371,7 +425,7 @@ function(__questasim_compile_lib IP_LIB)
         endif()
 
         if(VHDL_SOURCES)
-            set(DESCRIPTION "Compile VHDL sources for ${lib} with questasim vlog in library ${__comp_lib_name}")
+            set(DESCRIPTION "Compile VHDL sources for ${lib} with questasim vcom in library ${__comp_lib_name}")
             set(STAMP_FILE "${OUTDIR}/.${lib}_vcom_${CMAKE_CURRENT_FUNCTION}.stamp")
             add_custom_command(
                 OUTPUT ${STAMP_FILE}
@@ -433,7 +487,19 @@ function(__questasim_compile_lib IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function is called by ``questasim``, it shouldn't be used directly in a cmake file.
+#
+# It will set values for the HDL and DPI library arguments that will be used for compilation, elaboration and simulation.
+#
+# :param IP_LIB: IP library
+# :type IP_LIB: string
+#
+# **Keyword Arguments**
+#
+# :keyword OUTDIR: Output directory for the Questa compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
 #]]
 function(__get_questasim_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
@@ -483,7 +549,10 @@ function(__get_questasim_search_lib_args IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function allows to find the path to questasim home directory and to store it in a given variable.
+#
+# :param OUTVAR: Name of the variable in which questasim_home will be stored
+# :type OUTVAR: string
 #]]
 function(__find_questasim_home OUTVAR)
     find_program(exec_path vsim REQUIRED)
@@ -494,7 +563,29 @@ function(__find_questasim_home OUTVAR)
 endfunction()
 
 #[[[
-# To update
+# This function create a target to generate a SystemC wrapper for the IP library, with Questasim scgenmod, if SystemVerilog or Verilog files are in the IP library.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or Verilog files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bit compilation and simulation.
+# :type 32BIT: bool
+# :keyword QUIET: Disable output for informative messages
+# :type QUIET: bool
+# :keyword OUTDIR: Output directory for the Questa compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
+# :type SV_COMPILE_ARGS: string
+# :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type VHDL_COMPILE_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(questasim_gen_sc_wrapper IP_LIB)
     cmake_parse_arguments(ARG "32BIT;QUIET" "OUTDIR;LIBRARY;TOP_MODULE" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
@@ -606,7 +697,22 @@ function(questasim_gen_sc_wrapper IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function create a target to compile SystemC boundary library with sccom
+#
+# :param SC_LIB: IP library, it needs to have SOURCES property set with a list of SystemC files as **cxx_sources**.
+# :type IP_LIB: string
+# :type SC_LIB:
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bit compilation and simulation.
+# :type 32BIT: bool
+# :keyword OUTDIR: Output directory for the Questa compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
 #]]
 function(questasim_compile_sc_lib SC_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "" ${ARGN})
@@ -680,7 +786,18 @@ function(questasim_compile_sc_lib SC_LIB)
 endfunction()
 
 #[[[
-# To update
+# This macro is used to configure the C and CXX compiler to the one used by the tool.
+#
+# It can also be used to add some libraries, such as SystemC, DPI-C and VHPI in this case, for example if you want to use dpi, you should use this macro like this :
+# 
+# .. code-block:: cmake
+#
+#    questasim_configure_cxx(LIBRARIES DPI-C)
+#
+# **Keyword Arguments**
+#
+# :keyword LIBRARIES: Libraries that needs to be added.
+# :type LIBRARIES: list[string]
 #]]
 macro(questasim_configure_cxx)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})
@@ -702,7 +819,16 @@ macro(questasim_configure_cxx)
 endmacro()
 
 #[[[
-# To update
+# This function is called by the ``questasim_configure_cxx`` macro, you shouldn't use it directly.
+#
+# It will add the needed information to IP_LIB and add some flags for the compilation and linking.
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bitness.
+# :type 32BIT: bool
+# :keyword LIBRARIES: libraries that needs to be added, possible choice are SystemC, DPI-C and/or VHPI
+# :type LIBRARIES: list[string]
 #]]
 function(questasim_add_cxx_libs)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})
@@ -767,7 +893,9 @@ function(questasim_add_cxx_libs)
 endfunction()
 
 #[[[
-# To update
+# This macro is here in case the old modelsim SoCMake function has been called, due to a change in the function name, made to fit with the changes made in the past years with Modelsim/Questa.
+#
+# It will print a deprecation message and redirect the arguments used to the questasim SoCMake function.
 #]]
 macro(modelsim)
     message(DEPRECATION "${Red}modelsim function is deprecated, questasim() is called instead${ColourReset}")

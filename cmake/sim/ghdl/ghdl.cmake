@@ -4,7 +4,12 @@
 include_guard(GLOBAL)
 
 #[[[
-# To update
+# This function is used to set by ``ghdl``, it shouldn't be used directly in your cmake file.
+#
+# It is used to set a variable that contains the value of the VHDL standard to be used for compilation
+#
+# :param OUTVAR: The variable containing the retrieved VHDL standard
+# :type OUTVAR: string
 #]]
 function(__ghdl_get_standard_arg OUTVAR)
     set(SUPPORTED_VHDL_STANDARDS  87 93c 93 00 02 08)
@@ -19,7 +24,33 @@ function(__ghdl_get_standard_arg OUTVAR)
 endfunction()
 
 #[[[
-# To update
+# Create a target for invoking GHDL (compilation, elaboration, and simulation) on IP_LIB.
+#
+# It will create a target **run_<IP_LIB>_ghdl** that will compile, elaborate, and simulate the IP_LIB design.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of VHDL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword NO_RUN_TARGET: Do not create a run target.
+# :type NO_RUN_TARGET: bool
+# :keyword OUTDIR: Output directory for the GHDL compilation and simulation.
+# :type OUTDIR: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
+# :keyword EXECUTABLE_NAME: Replace the default name of the generated executable target.
+# :type EXECUTABLE_NAME: string
+# :keyword STANDARD: Specify the VHDL standard to be used, default value is 93, possible values are 87, 93c, 93, 00, 02 and 08.
+# :type STANDARD: string
+# :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type VHDL_COMPILE_ARGS: string
+# :keyword ELABORATE_ARGS: Extra arguments to be passed to the elaboration step.
+# :type ELABORATE_ARGS: string
+# :keyword RUN_ARGS: Extra arguments to be passed to the simulation step.
+# :type RUN_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(ghdl IP_LIB)
     cmake_parse_arguments(ARG "NO_RUN_TARGET;" "OUTDIR;TOP_MODULE;EXECUTABLE_NAME;STANDARD" "VHDL_COMPILE_ARGS;ELABORATE_ARGS;RUN_ARGS;FILE_SETS" ${ARGN})
@@ -141,7 +172,25 @@ function(ghdl IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function is called by ``ghdl``, it shouldn't be used directly in a cmake file.
+#
+# It will create an intermediary target to compile VDHL file, using ghdl analyze.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of VDHL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword OUTDIR: Output directory for the Questa compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword STANDARD: Specify the C++ version to be used.
+# :type STANDARD: string
+# :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type VHDL_COMPILE_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(__ghdl_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "" "LIBRARY;OUTDIR;STANDARD" "VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
@@ -254,7 +303,19 @@ function(__ghdl_compile_lib IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function is called by ``ghdl``, it shouldn't be used directly in a cmake file.
+#
+# It will set values for the HDL and DPI library arguments that will be used for compilation, elaboration and simulation.
+#
+# :param IP_LIB: IP library
+# :type IP_LIB: string
+#
+# **Keyword Arguments**
+#
+# :keyword OUTDIR: Output directory for the ghdl compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
 #]]
 function(__get_ghdl_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
@@ -284,7 +345,7 @@ function(__get_ghdl_search_lib_args IP_LIB)
             endif()
 
             set(lib_outdir ${ARG_OUTDIR}/${__comp_lib_name})
-            # Append current library outdhdl_libs_argsir to list of search directories
+            # Append current library outdir to list of search directories
             if(NOT "-P${lib_outdir}" IN_LIST hdl_libs_args)
                 list(APPEND hdl_libs_args -P${lib_outdir})
             endif()
@@ -296,7 +357,10 @@ function(__get_ghdl_search_lib_args IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function add the GHDL tools/include directory to the include directories of the VPI/DPI libraries, to be correctly compiled later.
+#
+# :param IP_LIB: IP library.
+# :type IP_LIB: string
 #]]
 function(__add_ghdl_cxx_properties_to_libs IP_LIB)
     if(ARG_UNPARSED_ARGUMENTS)
@@ -313,7 +377,7 @@ function(__add_ghdl_cxx_properties_to_libs IP_LIB)
         get_target_property(ip_type ${lib} TYPE)
         if(ip_type STREQUAL "SHARED_LIBRARY" OR ip_type STREQUAL "STATIC_LIBRARY")
             if(NOT ghdl_exec_path)
-                message(FATAL_ERROR "GHDL executable xrun was not found, cannot set include directory on DPI library")
+                message(FATAL_ERROR "GHDL executable was not found, cannot set include directory on DPI library")
             endif()
             # Add tools/include directory to the include directories of DPI libraries
             # TODO do this only when its needed

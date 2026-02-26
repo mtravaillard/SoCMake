@@ -6,7 +6,41 @@ include_guard(GLOBAL)
 socmake_add_languages(VCS_SC_PORTMAP)
 
 #[[[
-# To update
+# Create a target for invoking VCS (compilation, elaboration, and simulation) on IP_LIB.
+#
+# It will create a target **run_<IP_LIB>_vcs** that will compile, elaborate, and simulate the IP_LIB design.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or VHDL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword NO_RUN_TARGET: Do not create a run target.
+# :type NO_RUN_TARGET: bool
+# :keyword GUI: Run simulation in GUI mode.
+# :type GUI: bool
+# :keyword 32BIT: Use 32 bit compilation and simulation.
+# :type 32BIT: bool
+# :keyword OUTDIR: Output directory for the VCS compilation and simulation.
+# :type OUTDIR: string
+# :keyword EXECUTABLE_NAME: Replace the default name of the generated executable target.
+# :type EXECUTABLE_NAME: string
+# :keyword RUN_TARGET_NAME: Replace the default name of the run target.
+# :type RUN_TARGET_NAME: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
+# :type SV_COMPILE_ARGS: string
+# :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type VHDL_COMPILE_ARGS: string
+# :keyword ELABORATE_ARGS: Extra arguments to be passed to the elaboration step.
+# :type ELABORATE_ARGS: string
+# :keyword RUN_ARGS: Extra arguments to be passed to the simulation step.
+# :type RUN_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(vcs IP_LIB)
     cmake_parse_arguments(ARG "NO_RUN_TARGET;GUI;32BIT" "OUTDIR;EXECUTABLE_NAME;RUN_TARGET_NAME;TOP_MODULE;LIBRARY" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;ELABORATE_ARGS;RUN_ARGS;FILE_SETS" ${ARGN})
@@ -199,7 +233,31 @@ function(vcs IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function is called by ``vcs``, it shouldn't be used directly in a cmake file.
+#
+# It will create an intermediary target to compile VDHL and SystemVerilog/Verilog file, using vhdlan and vlogan.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or VDHL files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bit compilation and simulation.
+# :type 32BIT: bool
+# :keyword OUTDIR: Output directory for the VCS compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
+# :type SV_COMPILE_ARGS: string
+# :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type VHDL_COMPILE_ARGS: string
+# :keyword ELABORATE_ARGS: Extra arguments to be passed to the elaboration step.
+# :type ELABORATE_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(__vcs_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;ELABORATE_ARGS;FILE_SETS" ${ARGN})
@@ -405,7 +463,19 @@ function(__vcs_compile_lib IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function is called by ``vcs``, it shouldn't be used directly in a cmake file.
+#
+# It will set values for the HDL and DPI library arguments that will be used for compilation, elaboration and simulation.
+#
+# :param IP_LIB: IP library
+# :type IP_LIB: string
+#
+# **Keyword Arguments**
+#
+# :keyword OUTDIR: Output directory for the VCS compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
 #]]
 function(__get_vcs_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
@@ -446,7 +516,7 @@ function(__get_vcs_search_lib_args IP_LIB)
 
             set(lib_outdir ${OUTDIR}/${__comp_lib_name})
             file(MAKE_DIRECTORY ${lib_outdir})
-            # Append current library outdhdl_libs_argsir to list of search directories
+            # Append current library outdir to list of search directories
             if(NOT ${__comp_lib_name} IN_LIST hdl_libs)
                 list(APPEND hdl_libs ${__comp_lib_name})
                 string(APPEND synopsys_sim_setup_str "${__comp_lib_name}: ./${__comp_lib_name}\n")
@@ -460,7 +530,27 @@ function(__get_vcs_search_lib_args IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function create a target to generate a SystemC wrapper for the IP library, with VCS vlogan, if SystemVerilog or Verilog files are in the IP library.
+#
+# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or Verilog files.
+# :type IP_LIB: INTERFACE_LIBRARY
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bit compilation and simulation.
+# :type 32BIT: bool
+# :keyword OUTDIR: Output directory for the VCS compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
+# :type SV_COMPILE_ARGS: string
+# :keyword VHDL_COMPILE_ARGS: Extra arguments to be passed to the VHDL compilation step.
+# :type VHDL_COMPILE_ARGS: string
+# :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
+# :type FILE_SETS: list[string]
 #]]
 function(vcs_gen_sc_wrapper IP_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
@@ -562,7 +652,21 @@ function(vcs_gen_sc_wrapper IP_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function create a target to generate a Verilog wrapper file from a SystemC library with with VCS syscan.
+#
+# :param SC_LIB: Name of an existing CMake target representing the SystemC library.
+# :type SC_LIB: target
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bit compilation and simulation.
+# :type 32BIT: bool
+# :keyword OUTDIR: Output directory for the VCS compilation and simulation.
+# :type OUTDIR: string
+# :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
+# :type LIBRARY: string
+# :keyword TOP_MODULE: Top module name to be used for elaboration and simulation.
+# :type TOP_MODULE: string
 #]]
 function(vcs_gen_hdl_wrapper SC_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "" ${ARGN})
@@ -633,7 +737,10 @@ function(vcs_gen_hdl_wrapper SC_LIB)
 endfunction()
 
 #[[[
-# To update
+# This function allows to find the path to vcs home directory and to store it in a given variable.
+#
+# :param OUTVAR: Name of the variable in which vcs_home will be stored
+# :type OUTVAR: string
 #]]
 function(__find_vcs_home OUTVAR)
     find_program(exec_path vcs REQUIRED)
@@ -644,7 +751,18 @@ function(__find_vcs_home OUTVAR)
 endfunction()
 
 #[[[
-# To update
+# This macro is used to configure the C and CXX compiler to the one used by the tool.
+#
+# It can also be used to add some libraries, such as SystemC and DPI-C in this case, for example if you want to use dpi, you should use this macro like this :
+# 
+# .. code-block:: cmake
+#
+#    vcs_configure_cxx(LIBRARIES DPI-C)
+#
+# **Keyword Arguments**
+#
+# :keyword LIBRARIES: Libraries that needs to be added.
+# :type LIBRARIES: list[string]
 #]]
 macro(vcs_configure_cxx)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})
@@ -659,7 +777,16 @@ macro(vcs_configure_cxx)
 endmacro()
 
 #[[[
-# To update
+# This function is called by the ``vcs_configure_cxx`` macro, you shouldn't use it directly.
+#
+# It will add the needed information to IP_LIB and add some flags for the compilation and linking.
+#
+# **Keyword Arguments**
+#
+# :keyword 32BIT: Use 32 bitness.
+# :type 32BIT: bool
+# :keyword LIBRARIES: libraries that needs to be added, possible choice are SystemC and/or DPI-C
+# :type LIBRARIES: list[string]
 #]]
 function(vcs_add_cxx_libs)
     cmake_parse_arguments(ARG "32BIT" "" "LIBRARIES" ${ARGN})

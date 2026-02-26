@@ -4,7 +4,19 @@
 include_guard(GLOBAL)
 
 #[[[
-# To update
+# This function use fc4sc to merge already existing coverages files in the ``DIRECTORY`` directory (function's argument).
+#
+# :param DIRECTORY: Directory containing coverage informations 
+# :type DIRECTORY:path string
+#
+# **Keyword Arguments**
+#
+# :keyword OUTFILE: specify a path to an outfile and it name, by default it's set to ${CMAKE_CURRENT_BINARY_DIR}/coverage_merged_db.xml
+# :type OUTFILE: string
+# :keyword FC4SC_HOME: Path to the home directory of fc4sc
+# :type FC4SC_HOME: path string
+# :keyword DEPENDS: can be used if any dependencies need to be given for the coverage merging
+# :type DEPENDS: string
 #]]
 function(fc4sc_merge_coverage DIRECTORY)
     cmake_parse_arguments(ARG "" "OUTFILE;FC4SC_HOME" "DEPENDS" ${ARGN})
