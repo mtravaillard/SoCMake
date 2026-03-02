@@ -227,7 +227,6 @@ function(xcelium IP_LIB)
     socmake_allow_topological_sort(ON)
 endfunction()
 
-#[[[
 # This function is called by ``xcelium``, it shouldn't be used directly in a cmake file.
 #
 # It will create an intermediary target to compile VDHL and SystemVerilog/Verilog file, using ``xrun -compile``.
@@ -253,7 +252,6 @@ endfunction()
 # :type VHDL_COMPILE_ARGS: string
 # :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
 # :type FILE_SETS: list[string]
-#]]
 function(__xcelium_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY;TOP_MODULE" "COMPILE_ARGS;XRUN_COMPILE_ARGS;SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -473,7 +471,6 @@ function(__xcelium_compile_lib IP_LIB)
 
 endfunction()
 
-#[[[
 # This function is called by ``xcelium``, it shouldn't be used directly in a cmake file.
 #
 # It will set values for the HDL and DPI library arguments that will be used for compilation, elaboration and simulation.
@@ -487,7 +484,6 @@ endfunction()
 # :type OUTDIR: string
 # :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
 # :type LIBRARY: string
-#]]
 function(__get_xcelium_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -524,12 +520,10 @@ function(__get_xcelium_search_lib_args IP_LIB)
     set(DPI_LIBS_ARGS ${dpi_libs_args} PARENT_SCOPE)
 endfunction()
 
-#[[[
 # This function allows to find the path to xcelium home directory and to store it in a given variable.
 #
 # :param OUTVAR: Name of the variable in which xcelium_home will be stored
 # :type OUTVAR: string
-#]]
 function(__find_xcelium_home OUTVAR)
     find_program(exec_path xrun REQUIRED)
     get_filename_component(bin_path "${exec_path}" DIRECTORY)
@@ -849,7 +843,6 @@ function(xcelium_add_cxx_libs)
 
 endfunction()
 
-#[[[
 # Determine the default Xcelium compilation library name for a given IP_LIB.
 #
 # It will resolves the logical compilation library associated with it.
@@ -863,7 +856,6 @@ endfunction()
 #
 # :keyword LIBRARY: Specify the compilation library name to use.
 # :type LIBRARY: string
-#]]
 function(__xcelium_default_library OUT_LIB IP_LIB)
     cmake_parse_arguments(ARG "" "LIBRARY" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

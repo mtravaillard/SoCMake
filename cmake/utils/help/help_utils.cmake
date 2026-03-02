@@ -9,13 +9,10 @@ if(NOT JQ_EXECUTABLE)
     message(WARNING "Could not find \"jq\" executable, help menu's will not be available, please install jq")
 endif()
 
-
-#[[[
 # This function is used to convert values coming from cmake to json array to be correctly interpreted by jq.
 #
 # :param OUTVAR: Variable in which, we store the output
 # :type OUTVAR: string
-#]]
 function(__cmake_to_json_array OUTVAR)
     set(values_array "[]")
     if(ARGN)
@@ -29,8 +26,6 @@ function(__cmake_to_json_array OUTVAR)
     set(${OUTVAR} ${values_array} PARENT_SCOPE)
 endfunction()
 
-
-#[[[
 # This function is a generic function to create any type of help message.
 #
 # It uses ``jq`` to generate a .json file to have a better processing of the data, to display them in the terminal.
@@ -48,7 +43,6 @@ endfunction()
 #
 # :keyword PRINT_ON_CONF: If set, it will print the generated help message in the terminal when doing the cmake configuration/generating the makefiles
 # :type PRINT_ON_CONF: bool
-#]]
 function(_create_help_target HELP_NAME JQ_FILE OUTFILE GROUP_NAME)
     cmake_parse_arguments(ARG "PRINT_ON_CONF" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

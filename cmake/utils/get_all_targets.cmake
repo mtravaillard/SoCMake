@@ -15,14 +15,12 @@ function(get_all_targets OUTVAR)
     set(${OUTVAR} ${targets} PARENT_SCOPE)
 endfunction()
 
-#[[[
 # This function, looks recursively in a directory and it subdirectories, to find new target, then it appends them to the target list.
 #
 # :param targets: List containing all the targets found. 
 # :type targets: list[string]
 # :param dir: Path to a directory
 # :type dir: string
-#]]
 macro(__get_all_targets_recursive targets dir)
     get_property(subdirectories DIRECTORY ${dir} PROPERTY SUBDIRECTORIES)
     foreach(subdir ${subdirectories})

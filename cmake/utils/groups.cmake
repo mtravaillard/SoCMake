@@ -1,7 +1,6 @@
 #[[[ @module groups
 #]]
 
-#[[[
 # This functions can be used to create a a custom group of selected items, with a selected types. It will mainy be called by other function in this file, to create groups.
 #
 # One of the argument must be used to fill the group, but, it's not possible to use the argument Pattern and List at the same time.
@@ -17,7 +16,6 @@
 # :type PATTERN: string
 # :keyword LIST: if a list is given, the item in the group list are the one given in the list.
 # :type LIST: list[string]
-#]]
 function(_group_custom_items GROUP_NAME TYPE)
     cmake_parse_arguments(ARG "" "PATTERN" "LIST" ${ARGN})
     

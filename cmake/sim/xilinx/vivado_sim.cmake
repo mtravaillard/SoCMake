@@ -166,7 +166,6 @@ function(vivado_sim IP_LIB)
 
 endfunction()
 
-#[[[
 # This function is called by ``vivado_sim``, it shouldn't be used directly in a cmake file.
 #
 # It will create an intermediary target to compile VDHL and SystemVerilog/Verilog file, using xvhdl and xvlog.
@@ -184,7 +183,6 @@ endfunction()
 # :type XVHDL_ARGS: string
 # :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
 # :type FILE_SETS: list[string]
-#]]
 function(__vivado_sim_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR" "XVLOG_ARGS;XVHDL_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments

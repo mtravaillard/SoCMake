@@ -34,7 +34,6 @@ function(flatten_graph NODE)
     set_property(TARGET ${NODE} PROPERTY FLAT_GRAPH ${STACK})
 endfunction()
 
-#[[[
 # This function is a recursive DFS topological sort
 #
 # Will return 0 if the node doesn't have the TARGET keyword set or if it has already been processed, otherwise, it will return 1 after processing it.
@@ -43,7 +42,6 @@ endfunction()
 # :type NODE: node
 # :param RET: value returned by this function
 # :type RET: integer
-#]]
 function(__dfs_topo NODE RET)
     alias_dereference(NODE ${NODE})
 

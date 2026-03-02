@@ -232,7 +232,6 @@ function(vcs IP_LIB)
     socmake_allow_topological_sort(ON)
 endfunction()
 
-#[[[
 # This function is called by ``vcs``, it shouldn't be used directly in a cmake file.
 #
 # It will create an intermediary target to compile VDHL and SystemVerilog/Verilog file, using vhdlan and vlogan.
@@ -258,7 +257,6 @@ endfunction()
 # :type ELABORATE_ARGS: string
 # :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
 # :type FILE_SETS: list[string]
-#]]
 function(__vcs_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "32BIT" "OUTDIR;LIBRARY;TOP_MODULE" "SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;ELABORATE_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -462,7 +460,6 @@ function(__vcs_compile_lib IP_LIB)
 
 endfunction()
 
-#[[[
 # This function is called by ``vcs``, it shouldn't be used directly in a cmake file.
 #
 # It will set values for the HDL and DPI library arguments that will be used for compilation, elaboration and simulation.
@@ -476,7 +473,6 @@ endfunction()
 # :type OUTDIR: string
 # :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
 # :type LIBRARY: string
-#]]
 function(__get_vcs_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -736,12 +732,10 @@ function(vcs_gen_hdl_wrapper SC_LIB)
 
 endfunction()
 
-#[[[
 # This function allows to find the path to vcs home directory and to store it in a given variable.
 #
 # :param OUTVAR: Name of the variable in which vcs_home will be stored
 # :type OUTVAR: string
-#]]
 function(__find_vcs_home OUTVAR)
     find_program(exec_path vcs REQUIRED)
     get_filename_component(bin_path "${exec_path}" DIRECTORY)

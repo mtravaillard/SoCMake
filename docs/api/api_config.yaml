@@ -1,45 +1,45 @@
 input:
   # Whether undocumented functions should have documentation
   # auto-generated.
-  include_undocumented_function: true
+  include_undocumented_function: false
 
   # Whether undocumented macros should have documentation
   # auto-generated.
-  include_undocumented_macro: true
+  include_undocumented_macro: false
 
   # Whether undocumented classes should have documentation
   # auto-generated.
-  include_undocumented_cpp_class: true
+  include_undocumented_cpp_class: false
 
   # Whether undocumented attributes within CMakePP classes should have documentation
   # auto-generated.
-  include_undocumented_cpp_attr: true
+  include_undocumented_cpp_attr: false
 
   # Whether undocumented members within CMakePP classes should have documentation
   # auto-generated.
-  include_undocumented_cpp_member: true
+  include_undocumented_cpp_member: false
 
   # Whether undocumented constructors within CMakePP classes should have documentation
   # auto-generated.
-  include_undocumented_cpp_constructor: true
+  include_undocumented_cpp_constructor: false
 
   # Whether undocumented tests should have documentation
   # auto-generated.
-  include_undocumented_ct_add_test: true
+  include_undocumented_ct_add_test: false
 
   # Whether undocumented test sections should have documentation
   # auto-generated.
-  include_undocumented_ct_add_section: true
+  include_undocumented_ct_add_section: false
 
   # Whether undocumented options should have documentation
   # auto-generated.
-  include_undocumented_option: true
+  include_undocumented_option: false
 
   # Whether undocumented CTest tests should have documentation
   # auto-generated. This controls whether all vanilla
   # CMake add_test() commands should be documented,
   # it has no relation to CMakeTest tests.
-  include_undocumented_add_test: true
+  include_undocumented_add_test: false
 
   # Whether directories not containing .cmake
   # files should be excluded from recursive mode searching.

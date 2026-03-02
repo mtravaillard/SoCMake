@@ -3,14 +3,12 @@
 
 include_guard(GLOBAL)
 
-#[[[
 # This function is used to set by ``ghdl``, it shouldn't be used directly in your cmake file.
 #
 # It is used to set a variable that contains the value of the VHDL standard to be used for compilation
 #
 # :param OUTVAR: The variable containing the retrieved VHDL standard
 # :type OUTVAR: string
-#]]
 function(__ghdl_get_standard_arg OUTVAR)
     set(SUPPORTED_VHDL_STANDARDS  87 93c 93 00 02 08)
     if(ARGN)
@@ -171,7 +169,6 @@ function(ghdl IP_LIB)
 
 endfunction()
 
-#[[[
 # This function is called by ``ghdl``, it shouldn't be used directly in a cmake file.
 #
 # It will create an intermediary target to compile VDHL file, using ghdl analyze.
@@ -191,7 +188,6 @@ endfunction()
 # :type VHDL_COMPILE_ARGS: string
 # :keyword FILE_SETS: Specify list of File sets to retrieve the sources from
 # :type FILE_SETS: list[string]
-#]]
 function(__ghdl_compile_lib IP_LIB)
     cmake_parse_arguments(ARG "" "LIBRARY;OUTDIR;STANDARD" "VHDL_COMPILE_ARGS;FILE_SETS" ${ARGN})
     # Check for any unrecognized arguments
@@ -302,7 +298,6 @@ function(__ghdl_compile_lib IP_LIB)
 
 endfunction()
 
-#[[[
 # This function is called by ``ghdl``, it shouldn't be used directly in a cmake file.
 #
 # It will set values for the HDL and DPI library arguments that will be used for compilation, elaboration and simulation.
@@ -316,7 +311,6 @@ endfunction()
 # :type OUTDIR: string
 # :keyword LIBRARY: replace the default library name (worklib) to be used for elaboration and simulation.
 # :type LIBRARY: string
-#]]
 function(__get_ghdl_search_lib_args IP_LIB)
     cmake_parse_arguments(ARG "" "OUTDIR;LIBRARY" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -356,12 +350,10 @@ function(__get_ghdl_search_lib_args IP_LIB)
     set(DPI_LIBS_ARGS ${dpi_libs_args} PARENT_SCOPE)
 endfunction()
 
-#[[[
 # This function add the GHDL tools/include directory to the include directories of the VPI/DPI libraries, to be correctly compiled later.
 #
 # :param IP_LIB: IP library.
 # :type IP_LIB: string
-#]]
 function(__add_ghdl_cxx_properties_to_libs IP_LIB)
     if(ARG_UNPARSED_ARGUMENTS)
         message(FATAL_ERROR "${CMAKE_CURRENT_FUNCTION} passed unrecognized argument " "${ARG_UNPARSED_ARGUMENTS}")

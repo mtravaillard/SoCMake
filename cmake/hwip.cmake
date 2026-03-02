@@ -515,11 +515,9 @@ function(get_ip_include_directories OUTVAR IP_LIB LANGUAGE)
     set(${OUTVAR} ${INCDIRS} PARENT_SCOPE)
 endfunction()
 
-#[[[
 # This fonctions is used by the next function, to compare available version of IPs with the versions wanted.
 #
 # The allowed comparisons are ==, >=, >, <=, <, !=
-#]]
 function(__compare_version RESULT COMPARE_LHS RELATION COMPARE_RHS)
 
     unset(NEGATION)
@@ -545,12 +543,10 @@ function(__compare_version RESULT COMPARE_LHS RELATION COMPARE_RHS)
     endif()
 endfunction()
 
-#[[[
 # This function is used by ``ip_link``, it checks the conditions for version.
 #
 # It will check if condition needs to be checked. If it does,
 # It will strip the `IP_LIB` value to extract the VLN value and will return it.
-#]]
 function(__ip_link_check_version OUT_IP_WO_VERSION IP_LIB)
     string(REPLACE " " "" ip_lib_str "${IP_LIB}")
     string(REGEX MATCH "(!=|>=|<=|==|<|>)" version_ranges "${ip_lib_str}")

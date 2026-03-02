@@ -1,7 +1,6 @@
 #[[[ @module option
 #]]
 
-#[[[
 # This function is used to easierly create new option, and is used in the new options function. 
 #
 # :param NAME: name of the variable.
@@ -16,7 +15,6 @@
 # :type ADVANCED: boolean
 # :param POSSIBLE_VALUES: possible values variable can have
 # :type POSSIBLE_VALUES: list[string]
-#]]
 function(__define_socmake_option NAME TYPE DESCRIPTION DEFAULT ADVANCED)
     cmake_parse_arguments(ARG "" "" "POSSIBLE_VALUES" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
