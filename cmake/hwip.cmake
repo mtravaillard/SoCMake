@@ -50,9 +50,11 @@ include("${CMAKE_CURRENT_LIST_DIR}//utils/file_paths.cmake")
 # :type VERSION: string
 # :keyword DESCRIPTION: Short description to be associated with the IP library, will appear in `help_ips()` message
 # :type DESCRIPTION: string
+# :keyword VIRTUAL: used for fusesoc, allows to add an alias to refer to an ip lib, to be compatible with fusesoc virtual component
+# :type VIRTUAL: list[string]
 #]]
 function(add_ip IP_NAME)
-    cmake_parse_arguments(ARG "NO_ALIAS" "VENDOR;LIBRARY;VERSION;DESCRIPTION" "" ${ARGN})
+    cmake_parse_arguments(ARG "NO_ALIAS" "VENDOR;LIBRARY;VERSION;DESCRIPTION" "VIRTUAL" "" ${ARGN})
 
     # Vendor and library arguments are expected at the minimum
     if(ARG_UNPARSED_ARGUMENTS)
@@ -114,6 +116,22 @@ function(add_ip IP_NAME)
 
     set(IP_NAME ${IP_NAME} PARENT_SCOPE)
     set(IP ${IP_LIB} PARENT_SCOPE)
+    
+    # Create ALIAS targets for each virtual VLNV
+    if(ARG_VIRTUAL AND NOT ARG_NO_ALIAS)
+        foreach(virtual_vlnv IN LISTS ARG_VIRTUAL)
+            # __ format
+            string(REPLACE "::" "__" _virtual_target "${virtual_vlnv}")
+            if(NOT TARGET ${_virtual_target})
+                add_library(${_virtual_target} ALIAS ${IP_LIB})
+            endif()
+            # :: format
+            string(REPLACE "::" "::" _virtual_alias "${virtual_vlnv}")
+            if(NOT TARGET ${_virtual_alias})
+                add_library(${_virtual_alias} ALIAS ${IP_LIB})
+            endif()
+        endforeach()
+    endif()
 endfunction()
 
 #[[[

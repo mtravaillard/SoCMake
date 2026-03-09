@@ -81,11 +81,21 @@ def fusesoc_to_socmake(input_file: Path):
         ip_description = ip_description.replace(";", "")
     add_ip_vlnv_args: str = convert_fusesoc_vlnv_to_socmake_add_ip_args(ip_vlnv)
 
+    virtual_vlnv: list[str] | str | None = core_data.get('virtual', None)
+    virtual_arg: str = ""
+    if virtual_vlnv:
+        # virtual can be a list or a single string in FuseSoC
+        if isinstance(virtual_vlnv, list):
+            converted = [convert_depend_vlnv(v) for v in virtual_vlnv]
+            virtual_arg = "VIRTUAL " + " ".join(converted)
+        else:
+            virtual_arg = f"VIRTUAL {convert_depend_vlnv(virtual_vlnv)}"
+
     description_arg: str = ""
     if ip_description:
         description_arg = f'DESCRIPTION "{ip_description}"'
     # print(f'add_ip({add_ip_vlnv_args} {description_arg} NO_ALIAS)\n')
-    print(f'add_ip({add_ip_vlnv_args} {description_arg})\n')
+    print(f'add_ip({add_ip_vlnv_args} {description_arg} {virtual_arg})\n')
 
     dependencies: list[str] = []
     # Dictionary of (language, fileset, headers) -> list[files...]
