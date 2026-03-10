@@ -26,8 +26,8 @@ endfunction()
 #
 # It will create a target **run_<IP_LIB>_ghdl** that will compile, elaborate, and simulate the IP_LIB design.
 #
-# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of VHDL files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SOURCES property set with a list of VHDL files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #
@@ -173,8 +173,8 @@ endfunction()
 #
 # It will create an intermediary target to compile VDHL file, using ghdl analyze.
 #
-# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of VDHL files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SOURCES property set with a list of VDHL files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #
@@ -302,7 +302,7 @@ endfunction()
 #
 # It will set values for the HDL and DPI library arguments that will be used for compilation, elaboration and simulation.
 #
-# :param IP_LIB: IP library
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**
@@ -352,7 +352,7 @@ endfunction()
 
 # This function add the GHDL tools/include directory to the include directories of the VPI/DPI libraries, to be correctly compiled later.
 #
-# :param IP_LIB: IP library.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 function(__add_ghdl_cxx_properties_to_libs IP_LIB)
     if(ARG_UNPARSED_ARGUMENTS)

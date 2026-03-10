@@ -2,12 +2,9 @@
 #]]
 
 #[[[
-# This function use vhier, it is used to return all files in a verilog hierarchy using Verilog::Netlist.
-# It creates a Makefile target to run vhier command.
+# Creates a target for invoking `vhier tool <https://metacpan.org/pod/vhier>`_, which gets the hierarchical tree of a given **IP_LIB** and returns the source file of this tree.
 #
-# More information on vhier can be found on vhier man page.
-#
-# :param IP_LIB: target IP library.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**

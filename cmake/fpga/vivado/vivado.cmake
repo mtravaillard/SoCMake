@@ -4,16 +4,19 @@
 #[[[
 # Generate a vivado FPGA project and create a target to generate the bitstream.
 #
-# :param IP_LIB: target IP library.
+# The python script, edalize_vivado, using edalize library is used to correctly run vivado with the given informations.
+# The different arguments are parsed and formatted to be properly given to vivado. 
+#
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**
 #
-# :keyword TOP: Top-level module name. If not specified, the value of the ``IP_NAME`` target property is used.
+# :keyword TOP: Top-level module name used for elaboration. The default is the IP_LIB ``IP_NAME`` property.
 # :type TOP: string
-# :keyword VERILOG_DEFINES: Additional SV/V compilation flag to be passed to vivado project
+# :keyword VERILOG_DEFINES: Additional SV/Verilog compilation flags to be passed to vivado project
 # :type VERILOG_DEFINES: 
-# :keyword OUTDIR: output directory in which the files will be generated, if ommited ${BINARY_DIR}/vivado will be used.
+# :keyword OUTDIR: output directory in which the files will be generated. The default is ${BINARY_DIR}/vivado.
 # :type OUTDIR: string path
 #]]
 function(vivado IP_LIB)

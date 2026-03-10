@@ -2,7 +2,7 @@
 #]]
 
 #[[[
-# This function can be used to add an ip by using it ipxact .xml file
+# This function import an IP-XACT .xml file and convert it to an SoCMake HWIP.
 #
 # ``xmlstarlet`` or ``xsltproc`` will be used, depending on the one found on your system,
 # to extract the data coming from the .xml file.
@@ -15,7 +15,7 @@
 #
 # **Keyword Arguments**
 #
-# :keyword GENERATE_ONLY: If set, no .cmake file will be generated, the IP will still be set anyway, to be used in a parent scope.
+# :keyword GENERATE_ONLY: If set, no Config.cmake file is generated, but the HWIP is still created and can be referenced in a parent scope (similar to a call to add_ip(), the IP variable is set to the parent scope).
 # :type GENERATE_ONLY: bool
 # :keyword IPXACT_SOURCE_DIR: path to be set has ${ip_vendor}__${ip_library}__${ip_name}__${ip_version}_IPXACT_SOURCE_DIR, if this argument is used.
 # :type IPXACT_SOURCE_DIR: string

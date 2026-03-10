@@ -18,8 +18,8 @@
 # This function will append 2 generated files from PeakRDL-regblock to the **SYSTEMVERILOG_SOURCES** property of the
 # **${IP_LIB}**.
 #
-# :param IP_LIB: IP for which to create regblock target.
-# :type IP_LIB: IP library
+# :param IP_LIB: The target IP library.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #

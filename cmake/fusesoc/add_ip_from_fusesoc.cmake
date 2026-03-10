@@ -2,12 +2,13 @@
 #]]
 
 #[[[
-# This function can be used to add an ip by using it fusesoc file.
+# This function imports an IP fusesoc core file and convert it to an SoCMake HWIP.
 #
-# The top level core need to be given as an input to this function, it will convert FuseSoC .core (YAML) files to SoCMake CMakeLists.txt.
-# The different IP will be added to the IP_LIB, by formatting the information coming from the .core file, to add and link the IPs.
+# This function will convert FuseSoC .core (YAML) files to SoCMake CMakeLists.txt.
+# The IP will be added to the IP_LIB, by formatting the information coming from the .core file, to add and link the IP with it different file sets.
+# Unfortunately, this function does not resolve dependencies between different .core file, so the IPs that need to be linked with.
 #
-# :param CORE_FILE: Path to the fusesoc top level core file
+# :param CORE_FILE: Path to the fusesoc core file
 # :type CORE_FILE: string
 #]]
 function(add_ip_from_fusesoc CORE_FILE)

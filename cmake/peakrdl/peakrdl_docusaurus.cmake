@@ -8,8 +8,8 @@
 #
 # Refer to the internal documentation for more information.
 #
-# :param IP_LIB: RTL interface library, it needs to have SYSTEMRDL_SOURCES property set with a list of SystemRDL files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SYSTEMRDL_SOURCES property set with a list of SystemRDL files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #

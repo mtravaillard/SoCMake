@@ -6,8 +6,8 @@
 #
 # It will create a target **run_<IP_LIB>_verilator** that will compile, elaborate, and simulate the IP_LIB design.
 #
-# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SOURCES property set with a list of SystemVerilog files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #

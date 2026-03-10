@@ -602,7 +602,7 @@ endfunction()
 # If all the comparisons are not satisfied, FATAL_ERROR is issued.
 # Allowed comparisons are ==, >=, >, <=, <
 #
-# :param IP_LIB: The target IP library name.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**
@@ -659,7 +659,7 @@ endfunction()
 #
 # :param OUTVAR: Variable containing the requested property.
 # :type OUTVAR: string
-# :param IP_LIB: The target IP library name.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 # :param PROPERTY: Property to retrieve from IP_LIB.
 # :type PROPERTY: string
@@ -707,7 +707,7 @@ endfunction()
 # ip_compile_definitions(foo VERILOG "" FOO) # "" ignored
 # ip_compile_definitions(foo VERILOG -D FOO) # -D becomes "", then ignored.
 #
-# :param IP_LIB: The target IP library name.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 # :param LANGUAGE: Language to which the definition should apply.
 # :type LANGUAGE: string
@@ -756,7 +756,7 @@ endfunction()
 #
 # :param OUTVAR: Variable containing the requested property.
 # :type OUTVAR: string
-# :param IP_LIB: The target IP library name.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 # :param LANGUAGE: Language to which the definition apply.
 # :type LANGUAGE: string
@@ -924,7 +924,7 @@ endfunction()
 # This will then search for a file called "Vendor__Library__NameConfig.cmake" or "vendor__library__name-config.cmake"
 # It is recommended to place the directory of this file in "CMAKE_PREFIX_PATH" variable, to facilitate finding it
 #
-# :param IP_LIB: the name of the IP library to search for.
+# :param IP_LIB: the target IP library.
 # :type IP_LIB: string
 #]]
 macro(find_ip IP_LIB)
@@ -940,7 +940,7 @@ endmacro()
 # In case it is not already defined it calls ip_find(<ip_lib> REQUIRED)
 # Finally it calls ip_link() to link it.
 #
-# :param IP_LIB: the name of the IP library to search for.
+# :param IP_LIB: the target IP library.
 # :type IP_LIB: string
 #]]
 function(ip_find_and_link IP_LIB)
@@ -957,7 +957,7 @@ endfunction()
 #
 # The flattening is done using ``flatten_graph``, an SoCMake function and a variable is set to disallow further flattening, made by EDA tool.
 #
-# :param IP_LIB: the name of the IP library to flatten.
+# :param IP_LIB: the target IP library.
 # :type IP_LIB: string
 #]]
 function(flatten_graph_and_disallow_flattening IP_LIB)
@@ -997,7 +997,7 @@ endfunction()
 #[[[
 # As the name of this function say, it will look at ``SOCMAKE_ALLOW_TOPOLOGICAL_SORT`` value and proceed to flattening if allowed.
 #
-# :param IP_LIB: the name of the IP library to flatten.
+# :param IP_LIB: the target IP library.
 # :type IP_LIB: string
 #]]
 function(flatten_graph_if_allowed IP_LIB)

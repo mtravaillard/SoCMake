@@ -3,18 +3,15 @@
 include_guard(GLOBAL)
 
 #[[[
-# This function use vhdl-linter.
+# vhdl-linter tool interface.
 #
-# It can be found `here <https://github.com/vhdl-linter/vhdl-linter>`_
+# This function will create a target for linting the VHDL files, more information about the tool can be found `here <https://github.com/vhdl-linter/vhdl-linter>`_.
+# It does support ``vhdl-linter.yml`` configuration file, if you have your own.
 #
-# Function expects that **IP_LIB** *INTERFACE_LIBRARY* has **SOURCES** property set with a list of VHDL files to be used as inputs.
-# To set the SOURCES property use `target_sources() <https://cmake.org/cmake/help/latest/command/target_sources.html>`_ CMake function:
-# 
-# .. code-block:: cmake
+# It expects that **IP_LIB** has **SOURCES** property set with a list of VHDL files to be used as inputs.
 #
-#    target_sources(<your-lib> INTERFACE <sources>...)
-#
-# Function will create targets for linting the VHDL files.
+# During the linting, errors, warning or informations will be displayed in the terminal.
+# No changes will be done to the files and no new files with corrected errors or warning will be produced.
 #
 # :param IP_LIB: The target IP library.
 # :type IP_LIB: string

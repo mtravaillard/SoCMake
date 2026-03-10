@@ -20,7 +20,7 @@ endmacro()
 #
 # :param RESULT: If true, the SystemC library has correctly been linked to the IP library.
 # :type RESULT: bool
-# :param IP_LIB: IP library
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 function(__is_socmake_systemc_lib RESULT IP_LIB)
     set(__lib_to_check "SoCMake::SystemC")
@@ -31,7 +31,7 @@ endfunction()
 #
 # :param RESULT: If true, the DPI-C library has correctly been linked to the IP library.
 # :type RESULT: bool
-# :param IP_LIB: IP library
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 function(__is_socmake_dpic_lib RESULT IP_LIB)
     set(__lib_to_check "SoCMake::DPI-C")
@@ -42,7 +42,7 @@ endfunction()
 #
 # :param RESULT: If true, the VHPI library has correctly been linked to the IP library.
 # :type RESULT: bool
-# :param IP_LIB: IP library
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 function(__is_socmake_vhpi_lib RESULT IP_LIB)
     set(__lib_to_check "SoCMake::VHPI")
@@ -53,7 +53,7 @@ endfunction()
 #
 # :param RESULT: If true, the IP library is of the right type.
 # :type RESULT: bool
-# :param IP_LIB: IP library
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 function(__is_socmake_ip_lib RESULT IP_LIB)
     get_target_property(ip_type ${IP_LIB} TYPE)

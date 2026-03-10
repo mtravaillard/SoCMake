@@ -8,8 +8,8 @@ include_guard(GLOBAL)
 #
 # It will create a target **run_<IP_LIB>_xcelium** that will compile, elaborate, and simulate the IP_LIB design.
 #
-# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or VHDL files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SOURCES property set with a list of SystemVerilog or VHDL files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #
@@ -231,8 +231,8 @@ endfunction()
 #
 # It will create an intermediary target to compile VDHL and SystemVerilog/Verilog file, using ``xrun -compile``.
 #
-# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or VDHL files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SOURCES property set with a list of SystemVerilog or VDHL files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #
@@ -475,7 +475,7 @@ endfunction()
 #
 # It will set values for the HDL and DPI library arguments that will be used for compilation, elaboration and simulation.
 #
-# :param IP_LIB: IP library
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**
@@ -535,8 +535,8 @@ endfunction()
 #[[[
 # This function create a target to generate a SystemC wrapper for the IP library, with Xcelium xmshell, if SystemVerilog or Verilog files are in the IP library.
 #
-# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or Verilog files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SOURCES property set with a list of SystemVerilog or Verilog files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #
@@ -849,8 +849,8 @@ endfunction()
 #
 # :param OUT_LIB: Name of the variable that will receive the resolved library name.
 # :type OUT_LIB: string (output variable)
-# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of SystemVerilog or VHDL files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SOURCES property set with a list of SystemVerilog or VHDL files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #

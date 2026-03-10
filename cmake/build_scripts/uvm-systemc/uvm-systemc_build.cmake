@@ -9,9 +9,9 @@
 #
 # :keyword VERSION: Version of the UVM-SystemC library that need to be built.
 # :type VERSION: string
-# :keyword EXACT_VERSION: If EXACT_VERSION is set, if a UVM-SystemC library is already built but not in this version, it will build a new one.
+# :keyword EXACT_VERSION: If EXACT_VERSION is set, the UVM-SystemC library given version is build if not found.
 # :type EXACT_VERSION: bool
-# :keyword INSTALL_DIR: Path to the location where the library will be installed, by default it's set to ${PROJECT_BINARY_DIR}/uvm-systemc, unless if FETCHCONTENT_BASE_DIR is set.
+# :keyword INSTALL_DIR: Path to the location where the library will be installed. The default is ${PROJECT_BINARY_DIR}/uvm-systemc or ${FETCHCONTENT_BASE_DIR}/uvm-systemc if FETCHCONTENT_BASE_DIR is set.
 #]]
 function(uvm_systemc_build)
     cmake_parse_arguments(ARG "EXACT_VERSION" "VERSION;INSTALL_DIR" "" ${ARGN})

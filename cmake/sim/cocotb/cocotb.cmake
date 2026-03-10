@@ -4,11 +4,11 @@
 include_guard(GLOBAL)
 
 #[[[
-# This function simulated the IP library with the cocotb library.
+# Create a target for invoking simulation on IP_LIB using the `cocotb Python verification framework <https://www.cocotb.org/>`_.
 #
 # The function is a wrapper around supported simulators by cocotb. It is based on the cocotb Makefiles.
 #
-# :param IP_LIB: Name of the IP library to run iverilog on.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**

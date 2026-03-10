@@ -11,7 +11,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/../sv2v.cmake)
 # The function is a wrapper around the Yosys tool and generates necessary scripts
 # and configurations to run Yosys on the specified IP library.
 #
-# :param IP_LIB: Name of the IP library to run Yosys on.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**

@@ -9,7 +9,7 @@ include_guard(GLOBAL)
 # The function is a wrapper around the iverilog tool and generates necessary scripts
 # and configurations to compile the specified IP library.
 #
-# :param IP_LIB: Name of the IP library to run iverilog on.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**

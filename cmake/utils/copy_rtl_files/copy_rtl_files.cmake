@@ -9,10 +9,12 @@
 # all the include files and the source files with a preserved hierarchy folder. It uses the vhier tool to parse and build the library
 # hierachy and copy only the files instantiated in the hierarchy.
 # vhier is part of a set of tools:
+#
 # https://github.com/gitpan/Verilog-Perl
+#
 # https://metacpan.org/pod/vhier
 #
-# :param IP_LIB: IP library to get RTL sources from.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**

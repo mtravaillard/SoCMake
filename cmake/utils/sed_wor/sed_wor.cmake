@@ -4,11 +4,11 @@
 #[[[
 # This function replace "wor" with "wire" in all Verilog/SystemVerilog files given. 
 #
-# This is a workaround for a Verilator not supporting "wor" and similar keywords.
+# This is a workaround for some Verilator versions not supporting "wor" keywords.
 #
-# It will create a list called ``SED_WOR_SOURCES``, avaialble in the parent scope, that contains all the files, with the ones that needed to be modified.
+# All the **IP_LIB** source files ending with .v or .sv are processed using a simple `sed` command to replace wor with wire. The output file list is stored in ``SED_WOR_SOURCES`` and propagated to the parent scope.
 #
-# :param IP_LIB: target IP library.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 # :param BINARY_DIR: Path were this function will generate the outputs file, in ${BINARY_DIR}/sed_wor.
 # :type BINARY_DIR: string
