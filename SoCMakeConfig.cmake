@@ -99,17 +99,12 @@ include("${CMAKE_CURRENT_LIST_DIR}/cmake/lint/verible.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/lint/vhdl_linter.cmake")
 
 # ====================================
-# ====== Riscv =======================
-# ====================================
-
-include("${CMAKE_CURRENT_LIST_DIR}/cmake/riscv/sail/sail_install.cmake")
-
-# ====================================
 # ====== Build scripts ===============
 # ====================================
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/build_scripts/systemc/systemc_build.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/build_scripts/uvm-systemc/uvm-systemc_build.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/build_scripts/verilator/verilator_build.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/cmake/build_scripts/riscv/sail/sail_install.cmake")
 
 # ====================================
 # ====== IPXact ======================
