@@ -72,6 +72,11 @@ const config = {
             label: 'Documentation',
           },
           {
+            label: 'API Documentation',
+            to: 'https://hep-soc.github.io/SoCMake/api_html/index.html',
+            position: 'left',
+          },
+          {
             href: 'https://hep-soc.github.io/SoCMake/',
             label: 'GitLab',
             position: 'right',
