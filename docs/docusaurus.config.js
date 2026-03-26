@@ -77,8 +77,8 @@ const config = {
             position: 'left',
           },
           {
-            href: 'https://hep-soc.github.io/SoCMake/',
-            label: 'GitLab',
+            href: 'https://github.com/HEP-SoC/SoCMake',
+            label: 'Github',
             position: 'right',
           },
         ],
@@ -93,22 +93,9 @@ const config = {
                 label: 'Documentation',
                 to: '/docs/intro',
               },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                label: 'API Documentation',
+                to: 'https://hep-soc.github.io/SoCMake/api_html/index.html',
               },
             ],
           },
@@ -117,7 +104,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/HEP-SoC/SoCMake',
               },
             ],
           },
