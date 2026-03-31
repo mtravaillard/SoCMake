@@ -38,17 +38,17 @@ __fzf_socmake_target_ip_picker() {
 
 # FZF function for showing IPs
 _fzf_socmake_ips() {
-    __fzf_socmake_target_ip_picker "help/help_ips.json" "Select IP Target" ".ips"
+    __fzf_socmake_target_ip_picker ".help/help_ips.json" "Select IP Target" ".ips"
 }
 
 # FZF function for showing targets
 _fzf_socmake_target() {
-    __fzf_socmake_target_ip_picker "help/help_targets.json" "Select Build Target" ".targets"
+    __fzf_socmake_target_ip_picker ".help/help_targets.json" "Select Build Target" ".targets"
 }
 
 # FZF function for appending cmake options to cmake command
 _fzf_cmake_option_append() {
-    local json_file="help/help_options.json"
+    local json_file=".help/help_options.json"
     if [[ ! -f "$json_file" ]]; then
         echo "Could not find $json_file, verify you are in build directory and the project is configured"
         return
