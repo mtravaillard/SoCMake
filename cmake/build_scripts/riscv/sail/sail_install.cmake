@@ -1,7 +1,15 @@
+#[[[ @module sail
+#]]
+
 include_guard(GLOBAL)
 
 set(SAIL_INSTALL_LIST_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE INTERNAL "")
 
+#[[[
+# This macro install the RISC-V SAIL C-emulator. No arguments are needed.
+#
+# pip will be needed to install the requirements for SAIL installation, then a bash script will be ran.
+#]]
 # SAIL C-emulator installation macro
 macro(sail_install)
     cmake_parse_arguments(ARG "" "" "" ${ARGN})

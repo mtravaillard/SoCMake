@@ -52,9 +52,6 @@ include("${CMAKE_CURRENT_LIST_DIR}/cmake/sim/xilinx/vivado_sim.cmake")
 # ----- FC4SC -------
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/sim/fc4sc/fc4sc_merge_coverage.cmake")
 
-# ----- VeriSC --------
-include("${CMAKE_CURRENT_LIST_DIR}/cmake/sim/verisc/verisc_install.cmake")
-
 # ----- Cocotb --------
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/sim/cocotb/cocotb.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/sim/cocotb/add_cocotb_tests.cmake")
@@ -102,17 +99,12 @@ include("${CMAKE_CURRENT_LIST_DIR}/cmake/lint/verible.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/lint/vhdl_linter.cmake")
 
 # ====================================
-# ====== Riscv =======================
-# ====================================
-
-include("${CMAKE_CURRENT_LIST_DIR}/cmake/riscv/sail/sail_install.cmake")
-
-# ====================================
 # ====== Build scripts ===============
 # ====================================
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/build_scripts/systemc/systemc_build.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/build_scripts/uvm-systemc/uvm-systemc_build.cmake")
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/build_scripts/verilator/verilator_build.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/cmake/build_scripts/riscv/sail/sail_install.cmake")
 
 # ====================================
 # ====== IPXact ======================

@@ -16,8 +16,8 @@
 #    ip_sources(ip SYSTEMRDL ${PROJECT_SOURCE_DIR}/file.rdl)
 #
 #
-# :param IP_LIB: IP for which to create html target.
-# :type IP_LIB: IP library
+# :param IP_LIB: The target IP library.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #

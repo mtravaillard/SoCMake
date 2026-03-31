@@ -2,7 +2,8 @@
 <img src="docs/static/img/SoCMakeLogo3.png" alt="SoCMake" width="40%">
 
   <a href="https://hep-soc.github.io/SoCMake/">Documentation</a> |
-  <a href="https://github.com/HEP-SoC/SoCMake/tree/develop/examples">Examples</a>
+  <a href="https://github.com/HEP-SoC/SoCMake/tree/develop/examples">Examples</a> |
+  <a href="https://hep-soc.github.io/SoCMake/api_html/index.html">API documentation</a>
 </h1>
 
 

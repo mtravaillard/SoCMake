@@ -1,11 +1,14 @@
+#[[[ @module cocotb
+#]]
+
 include_guard(GLOBAL)
 
-# [[[
-# This function simulated the IP library with the cocotb library.
+#[[[
+# Create a target for invoking simulation on IP_LIB using the `cocotb Python verification framework <https://www.cocotb.org/>`_.
 #
 # The function is a wrapper around supported simulators by cocotb. It is based on the cocotb Makefiles.
 #
-# :param IP_LIB: Name of the IP library to run iverilog on.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**
@@ -30,11 +33,11 @@ include_guard(GLOBAL)
 # :type TIMESCALE: string
 # :keyword PYTHONPATH: List of paths to be added to the PYTHONPATH environment variable to include python modules needed for the simulation.
 # :type PYTHONPATH: string
-# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the System Verilog / Verilog compilation step.
+# :keyword SV_COMPILE_ARGS: Extra arguments to be passed to the SystemVerilog / Verilog compilation step.
 # :type SV_COMPILE_ARGS: string
 # :keyword RUN_ARGS: Extra arguments to be passed to the simulation step.
 # :type RUN_ARGS: string
-# ]]]
+#]]
 function(cocotb IP_LIB)
     # Parse the function arguments
     cmake_parse_arguments(ARG "NO_RUN_TARGET;GUI" "OUTDIR;RUN_TARGET_NAME;TOP_MODULE;COCOTB_MODULE;COCOTB_TESTCASE;SIM;TIMESCALE" "PYTHONPATH;SV_COMPILE_ARGS;RUN_ARGS" ${ARGN})

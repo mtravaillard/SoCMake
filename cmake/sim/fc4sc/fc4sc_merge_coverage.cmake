@@ -1,7 +1,25 @@
+#[[[ @module fc4sc
+#]]
+
 include_guard(GLOBAL)
 
+#[[[
+# This function use fc4sc to merge already existing coverages files in the ``DIRECTORY`` directory (function's argument).
+#
+# :param DIRECTORY: Directory containing coverage informations 
+# :type DIRECTORY: path string
+#
+# **Keyword Arguments**
+#
+# :keyword OUTFILE: specify a path to an outfile and it name, by default it's set to ${CMAKE_CURRENT_BINARY_DIR}/coverage_merged_db.xml
+# :type OUTFILE: string
+# :keyword FC4SC_HOME: Path to the home directory of fc4sc
+# :type FC4SC_HOME: path string
+# :keyword DEPENDS: can be used if any dependencies need to be given for the coverage merging
+# :type DEPENDS: string
+#]]
 function(fc4sc_merge_coverage DIRECTORY)
-    cmake_parse_arguments(ARG "" "OUTFILE;FC4SC_HOME;VERISC_HOME" "DEPENDS" ${ARGN})
+    cmake_parse_arguments(ARG "" "OUTFILE;FC4SC_HOME" "DEPENDS" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
         message(FATAL_ERROR "${CMAKE_CURRENT_FUNCTION} passed unrecognized argument " "${ARG_UNPARSED_ARGUMENTS}")
     endif()
@@ -14,15 +32,6 @@ function(fc4sc_merge_coverage DIRECTORY)
         set(OUTFILE ${ARG_OUTFILE})
     endif()
 
-    if(ARG_VERISC_HOME AND ARG_FC4SC_HOME)
-        message(FATAL_ERROR "Specify only one of VERISC_HOME, FC4SC_HOME")
-    endif()
-    
-    if(ARG_VERISC_HOME)
-        set(SEARCH_HINT "${ARG_VERISC_HOME}/*/*")
-    elseif(VERISC_HOME)
-        set(SEARCH_HINT "${VERISC_HOME}/*/*")
-    endif()
     if(ARG_FC4SC_HOME)
         set(SEARCH_HINT "${ARG_FC4SC_HOME}/")
     elseif(FC4SC_HOME)

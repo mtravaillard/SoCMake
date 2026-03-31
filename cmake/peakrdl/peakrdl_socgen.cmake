@@ -1,3 +1,6 @@
+#[[[ @module peakrdl_socgen
+#]]
+
 #[[[
 # Create a target for invoking PeakRDL-socgen on IP_LIB.
 #
@@ -32,8 +35,8 @@
 #
 # PeakRDL-socgen also generates a graphviz .dot file as a visualization of the generated architecture.
 #
-# :param IP_LIB: RTL interface library, it needs to have SYSTEMRDL_SOURCES property set with a list of SystemRDL files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SYSTEMRDL_SOURCES property set with a list of SystemRDL files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #

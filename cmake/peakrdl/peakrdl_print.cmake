@@ -1,3 +1,6 @@
+#[[[ @module peakrdl_print
+#]]
+
 #[[[
 # Creates a target <IP_LIB>_peakrdl_print that prints address map in terminal.
 #

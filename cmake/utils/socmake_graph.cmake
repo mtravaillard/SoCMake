@@ -1,9 +1,14 @@
+#[[[ @module socmake_graph
+#]]
+
 include_guard(GLOBAL)
 
-# ========================================================== #
-# ======== Internal graph flattening functions ============= #
-# ========================================================== #
-
+#[[[
+# this function is the internal graph flattening functions
+#
+# :param NODE: node to be flattened
+# :type NODE: node
+#]]
 function(flatten_graph NODE)
     alias_dereference(NODE ${NODE})
 
@@ -29,9 +34,14 @@ function(flatten_graph NODE)
     set_property(TARGET ${NODE} PROPERTY FLAT_GRAPH ${STACK})
 endfunction()
 
-# ------------------------------------------------------------------ #
-# Recursive DFS topological sort
-# ------------------------------------------------------------------ #
+# This function is a recursive DFS topological sort
+#
+# Will return 0 if the node doesn't have the TARGET keyword set or if it has already been processed, otherwise, it will return 1 after processing it.
+#
+# :param NODE: node to be processed
+# :type NODE: node
+# :param RET: value returned by this function
+# :type RET: integer
 function(__dfs_topo NODE RET)
     alias_dereference(NODE ${NODE})
 
@@ -85,9 +95,16 @@ function(__dfs_topo NODE RET)
     set(${RET} 1 PARENT_SCOPE)
 endfunction()
 
-# ------------------------------------------------------------------ #
-# Utility: compare lists (unchanged)
-# ------------------------------------------------------------------ #
+#[[[
+# Function to compare 2 list, will return 1 if they are equal, otherwise, will return -1.
+#
+# :param L1: 1st list
+# :type L1: list
+# :param L2: 2nd list
+# :type L2: list
+# :param RET: returned value for the comparison 
+# :type RET: integer
+#]]
 function(compare_lists L1 L2 RET)
     set(_l1 ${L1})
     set(_l2 ${L2})

@@ -1,6 +1,20 @@
-# sed_wor.cmake
-# String replace "wor" with "wire" in all Verilog files files. 
-# This is a workaround for a Verilator not supporting "wor" and similar keywords...
+#[[[ @module sed_wor
+#]]
+
+#[[[
+# This function replace "wor" with "wire" in all Verilog/SystemVerilog files given. 
+#
+# This is a workaround for some Verilator versions not supporting "wor" keywords.
+#
+# All the **IP_LIB** source files ending with .v or .sv are processed using a simple `sed` command to replace wor with wire. The output file list is stored in ``SED_WOR_SOURCES`` and propagated to the parent scope.
+#
+# :param IP_LIB: The target IP library.
+# :type IP_LIB: string
+# :param BINARY_DIR: Path were this function will generate the outputs file, in ${BINARY_DIR}/sed_wor.
+# :type BINARY_DIR: string
+# :param SOURCES: list of the sources, any file can be given, only the .v/.sv files will be copied and modified.
+# :type SOURCES: list
+#]]
 function(sed_wor IP_LIB BINARY_DIR SOURCES)
     file(MAKE_DIRECTORY ${BINARY_DIR}/sed_wor)
     set(MODIFIED_SOURCES "")

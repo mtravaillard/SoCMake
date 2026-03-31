@@ -1,5 +1,16 @@
+#[[[ @module build_scripts
+#]]
+
 include_guard(GLOBAL)
 
+#[[[
+# This function can be used to build yosys if needed. A tag or a version need to be given in the arguments, both can't be used at the same time obviously.
+#
+# :param TAG: Git tag for the version of Yosys that needs to be built
+# :type TAG: string
+# :param VERSION: Version of Yosys that needs to be built
+# :type VERSION: string
+#]]
 function(yosys_build)
 
     cmake_parse_arguments(ARG 

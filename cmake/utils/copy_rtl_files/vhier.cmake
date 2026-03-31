@@ -1,3 +1,25 @@
+#[[[ @module vhier
+#]]
+
+#[[[
+# Creates a target for invoking `vhier tool <https://metacpan.org/pod/vhier>`_, which gets the hierarchical tree of a given **IP_LIB** and returns the source file of this tree.
+#
+# :param IP_LIB: The target IP library.
+# :type IP_LIB: string
+#
+# **Keyword Arguments**
+#
+# :keyword TOP_MODULE: if set, add --top-module ${IP_NAME} flags, that will start looking at the hierarchy by starting at the given top modules.
+# :type TOP_MODULE: bool
+# :keyword XML: if set, add --xml flags, that creates an output in xml format.
+# :type XML: bool
+# :keyword FILES: if set, add --module-files flags, that shows all module filenames, in a top-down order.
+# :type FILES: bool
+# :keyword MODULES: if set, add --modules flag, that shows all module names.
+# :type MODULES: bool
+# :keyword FOREST: if set, add --forest flags, that shows an "ASCII-art" hierarchy tree of all cells.
+# :type FOREST: bool
+#]]
 function(vhier IP_LIB)
     cmake_parse_arguments(ARG "XML;FILES;MODULES;FOREST" "TOP_MODULE" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
