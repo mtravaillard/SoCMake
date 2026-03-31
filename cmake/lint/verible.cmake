@@ -4,21 +4,14 @@
 #[[[
 # Verible lint tool interface
 #
-# Verible-lint is a SystemVerilog linter...
+# This function will create a target for linting the SystemVerilog files, more information about the tool can be found `here <https://github.com/chipsalliance/verible>`_.
 #
-# Verible can be found `here <https://github.com/chipsalliance/verible>`_
-#
-# Function expects that **IP_LIB** *INTERFACE_LIBRARY* has **SOURCES** property set with a list of System Verilog files to be used as inputs.
-# To set the SOURCES property use `target_sources() <https://cmake.org/cmake/help/latest/command/target_sources.html>`_ CMake function:
-# 
-# .. code-block:: cmake
-#
-#    target_sources(<your-lib> INTERFACE <sources>...)
+# It expects that **IP_LIB** *INTERFACE_LIBRARY* has **SOURCES** property set with a list of System Verilog files to be used as inputs.
 #
 # Function will create targets for linting or formatting depending on passed option
 #
-# :param IP_LIB: RTL interface library, it needs to have SOURCES property set with a list of System Verilog files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #

@@ -1,14 +1,17 @@
+#[[[ @module yosys
+#]]
+
 include_guard(GLOBAL)
 
 include(${CMAKE_CURRENT_LIST_DIR}/../sv2v.cmake)
 
-# [[[
+#[[[
 # This function runs the Yosys synthesis tool on a specified IP library.
 #
 # The function is a wrapper around the Yosys tool and generates necessary scripts
 # and configurations to run Yosys on the specified IP library.
 #
-# :param IP_LIB: Name of the IP library to run Yosys on.
+# :param IP_LIB: The target IP library.
 # :type IP_LIB: string
 #
 # **Keyword Arguments**
@@ -27,7 +30,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/../sv2v.cmake)
 # :type SHOW: boolean
 # :keyword REPLACE: Replace original sources with the generated Verilog source.
 # :type REPLACE: boolean
-# ]]]
+#]]
 function(yosys IP_LIB)
     # TODO iterate over linked libraries and replace SYSTEMVERILOG_SOURCES with VERILOG_SOURCES instead
 

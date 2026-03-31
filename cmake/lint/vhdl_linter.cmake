@@ -1,5 +1,21 @@
+#[[[ @module vhdl
+#]]
 include_guard(GLOBAL)
 
+#[[[
+# vhdl-linter tool interface.
+#
+# This function will create a target for linting the VHDL files, more information about the tool can be found `here <https://github.com/vhdl-linter/vhdl-linter>`_.
+# It does support ``vhdl-linter.yml`` configuration file, if you have your own.
+#
+# It expects that **IP_LIB** has **SOURCES** property set with a list of VHDL files to be used as inputs.
+#
+# During the linting, errors, warning or informations will be displayed in the terminal.
+# No changes will be done to the files and no new files with corrected errors or warning will be produced.
+#
+# :param IP_LIB: The target IP library.
+# :type IP_LIB: string
+#]]
 function(vhdl_linter IP_LIB)
     cmake_parse_arguments(ARG "" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

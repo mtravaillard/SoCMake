@@ -1,3 +1,15 @@
+#[[[ @module cocotb_tests
+#]]
+
+#[[[
+# This function scans a given directory for cocotb test subdirectories and registers each as a CTest, with support for both simple and multi-testcase cocotb test configurations.
+# Multi-testcase tests are auto-numbered into single CTest and a ``check`` target is created to run all the different tests.
+#
+# :param IP_LIB: The target IP library, it needs to have SOURCES property set with a list of SystemVerilog files.
+# :type IP_LIB: string
+# :param DIRECTORY: Path to the directory containing the cocotb test subdirectories to scan. Subdirectories prefixed with ``_`` are excluded.
+# :type DIRECTORY: path string
+#]]
 function(add_cocotb_tests IP_LIB DIRECTORY)
     include("${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../utils/subdirectory_search.cmake")
     include("${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../../utils/colours.cmake")

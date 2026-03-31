@@ -1,3 +1,20 @@
+#[[[ @module option
+#]]
+
+# This function is used to easierly create new option, and is used in the new options function. 
+#
+# :param NAME: name of the variable.
+# :type NAME: string
+# :param TYPE: type of the variable
+# :type TYPE: string
+# :param DESCRIPTION: short description string for the variable
+# :type DESCRIPTION: string
+# :param DEFAULT: default value of the variable
+# :type DEFAULT: integer 
+# :param ADVANCED: optional, mark options as advanced, it will not show in help menu
+# :type ADVANCED: boolean
+# :param POSSIBLE_VALUES: possible values variable can have
+# :type POSSIBLE_VALUES: list[string]
 function(__define_socmake_option NAME TYPE DESCRIPTION DEFAULT ADVANCED)
     cmake_parse_arguments(ARG "" "" "POSSIBLE_VALUES" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
@@ -31,7 +48,7 @@ endfunction()
 # :param DEFAULT: default value of the variable
 # :type DEFAULT: integer 
 # :param ADVANCED: optional, mark options as advanced, it will not show in help menu
-# :type DEFAULT: boolean
+# :type ADVANCED: boolean
 #]]
 function(option_enum VARIABLE DESCRIPTION ENUM_VALUES DEFAULT)
     cmake_parse_arguments(ARG "ADVANCED" "" "" ${ARGN})
@@ -64,7 +81,7 @@ endfunction()
 # :param DEFAULT: default value of the variable
 # :type DEFAULT: string 
 # :param ADVANCED: optional, mark options as advanced, it will not show in help menu
-# :type DEFAULT: string
+# :type ADVANCED: string
 #]]
 function(option_string VARIABLE DESCRIPTION DEFAULT)
     cmake_parse_arguments(ARG "ADVANCED" "" "" ${ARGN})
@@ -88,9 +105,9 @@ endfunction()
 # :param DEFAULT: default value of the variable
 # :type DEFAULT: string 
 # :param ADVANCED: optional, mark options as advanced, it will not show in help menu
-# :type DEFAULT: string
+# :type ADVANCED: string
 # :param CHECK_EXISTS: optional, check if the file path exists at the time of configuring the project, default FALSE
-# :type DEFAULT: boolean
+# :type CHECK_EXISTS: boolean
 #]]
 function(option_file VARIABLE DESCRIPTION DEFAULT)
     cmake_parse_arguments(ARG "ADVANCED;CHECK_EXISTS" "" "" ${ARGN})
@@ -120,9 +137,9 @@ endfunction()
 # :param DEFAULT: default value of the variable
 # :type DEFAULT: string 
 # :param ADVANCED: optional, mark options as advanced, it will not show in help menu
-# :type DEFAULT: string
+# :type ADVANCED: string
 # :param CHECK_EXISTS: optional, check if the directory path exists at the time of configuring the project, default FALSE
-# :type DEFAULT: boolean
+# :type CHECK_EXISTS: boolean
 #]]
 function(option_directory VARIABLE DESCRIPTION DEFAULT)
     cmake_parse_arguments(ARG "ADVANCED;CHECK_EXISTS" "" "" ${ARGN})
@@ -152,7 +169,7 @@ endfunction()
 # :param DEFAULT: default value of the variable
 # :type DEFAULT: integer 
 # :param ADVANCED: optional, mark options as advanced, it will not show in help menu
-# :type DEFAULT: boolean
+# :type ADVANCED: boolean
 #]]
 function(option_integer VARIABLE DESCRIPTION DEFAULT)
     cmake_parse_arguments(ARG "ADVANCED" "" "" ${ARGN})
@@ -179,7 +196,7 @@ endfunction()
 # :param DEFAULT: default value of the variable
 # :type DEFAULT: boolean 
 # :param ADVANCED: optional, mark options as advanced, it will not show in help menu
-# :type DEFAULT: boolean
+# :type ADVANCED: boolean
 #]]
 function(option_boolean VARIABLE DESCRIPTION DEFAULT)
     cmake_parse_arguments(ARG "ADVANCED" "" "" ${ARGN})

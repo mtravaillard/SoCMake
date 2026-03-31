@@ -1,3 +1,6 @@
+#[[[ @module peakrdl_ipblocksvg
+#]]
+
 #[[[
 # Create a target for invoking PeakRDL-ipblocksvg on IP_LIB.
 #
@@ -22,9 +25,8 @@
 # This function will append .png files to the **GRAPHIC_FILES** of the **IP_LIB**.
 #
 #
-# :param IP_LIB: RTL interface library, it needs to have SYSTEMRDL_SOURCES property set with a list
-# of SystemRDL files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SYSTEMRDL_SOURCES property set with a list of SystemRDL files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #

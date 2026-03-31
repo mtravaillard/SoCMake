@@ -1,3 +1,6 @@
+#[[[ @module colours
+#]]
+
 if(NOT WIN32)
   string(ASCII 27 Esc)
   set(ColourReset "${Esc}[m")
@@ -20,6 +23,31 @@ endif()
 
 set(__Colours Red Green Yellow Blue Magenta Cyan White BoldRed BoldGreen BoldYellow BoldBlue BoldMagenta BoldCyan BoldWhite)
 
+#[[[
+# This function is allow to easierly display a text in a colour.
+#
+# The available colors are the following:
+#
+# - Red
+# - Green
+# - Yellow
+# - Blue
+# - Magenta
+# - Cyan
+# - White
+# - BoldRed
+# - BoldGreen
+# - BoldYellow
+# - BoldBlue
+# - BoldMagenta
+# - BoldCyan
+# - BoldWhite
+#
+# :param TEXT: Text to be displayed.
+# :type TEXT: string
+# :param COLOUR: Colour for the text to be displayed.
+# :type HELP_COLOURNAME: string
+#]]
 function(msg TEXT COLOUR)
     cmake_parse_arguments(ARG "" "" "" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)

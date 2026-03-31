@@ -1,3 +1,6 @@
+#[[[ @module uniquify_files_by_basename
+#]]
+
 #[[[
 # This function uniquify a list of files based on the basename (name + extension) of the files.
 #

@@ -1,3 +1,6 @@
+#[[[ @module peakrdl_halcpp
+#]]
+
 #[[[
 # Create a target for invoking PeakRDL-halcpp on IP_LIB.
 #
@@ -30,8 +33,8 @@
 #        FILES "firmware/hal/<lib>_ext.h"
 #    )
 #
-# :param IP_LIB: RTL interface library, it needs to have SYSTEMRDL_SOURCES property set with a list of SystemRDL files.
-# :type IP_LIB: INTERFACE_LIBRARY
+# :param IP_LIB: The target IP library, it needs to have SYSTEMRDL_SOURCES property set with a list of SystemRDL files.
+# :type IP_LIB: string
 #
 # **Keyword Arguments**
 #
@@ -128,10 +131,8 @@ function(peakrdl_halcpp IP_LIB)
 
 endfunction()
 
-#[[[
 # Find headers that have _ext.h extension and compare with libraries. If there is a library that
 # matches the file name add it to list.
-#]]
 function(__ext_header_provided LIB libs)
     get_ip_property(HEADERS ${LIB} HEADER_SET)
     get_ip_property(FLAT_GRAPH ${LIB} FLAT_GRAPH)
