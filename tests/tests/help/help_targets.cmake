@@ -254,9 +254,9 @@ function(${${TEST_NAME}})
         endif()
     endfunction()
 
-    set(TARGETS_JSON "${CMAKE_BINARY_DIR}/help/help_targets.json")
-    set(IPS_JSON "${CMAKE_BINARY_DIR}/help/help_ips.json")
-    set(OPTIONS_JSON "${CMAKE_BINARY_DIR}/help/help_options.json")
+    set(TARGETS_JSON "${CMAKE_BINARY_DIR}/.help/help_targets.json")
+    set(IPS_JSON "${CMAKE_BINARY_DIR}/.help/help_ips.json")
+    set(OPTIONS_JSON "${CMAKE_BINARY_DIR}/.help/help_options.json")
 
     # Test that JSON files exist
     if(NOT EXISTS "${TARGETS_JSON}")
