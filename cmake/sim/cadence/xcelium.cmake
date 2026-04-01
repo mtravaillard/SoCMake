@@ -332,9 +332,6 @@ function(__xcelium_compile_lib IP_LIB)
         # If neither LIBRARY property is set, or LIBRARY passed as argument, use "worklib" as default
         __xcelium_default_library(__comp_lib_name ${lib})
 
-
-        message(STATUS "Xcelium compile library: ${lib} in library ${__comp_lib_name}")
-
         # Create output directoy for the VHDL library
         set(lib_outdir ${OUTDIR}/xcelium.d/${__comp_lib_name})
 
