@@ -58,8 +58,9 @@ function(add_ip_from_ipxact COMP_XML)
     cmake_path(GET COMP_XML STEM file_stem)
 
     # Up-convert the file to 2022 using Accellera migration scripts if needed
-    set(XSLT_2009_TO_2014 "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/from1685_2009_to_1685_2014.xsl")
-    set(XSLT_2014_TO_2022 "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/from1685_2014_to_1685_2022.xsl")
+    set(UPVERT_SCRIPT_DIR "${CMAKE_CURRENT_FUNCTION_LIST_DIR}/../upvert")
+    set(XSLT_2009_TO_2014 "${UPVERT_SCRIPT_DIR}/from1685_2009_to_1685_2014.xsl")
+    set(XSLT_2014_TO_2022 "${UPVERT_SCRIPT_DIR}/from1685_2014_to_1685_2022.xsl")
 
     # Work with a copy so we never modify the original file
     set(WORKING_XML "${COMP_XML}")

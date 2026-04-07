@@ -30,6 +30,7 @@ set(EXCLUDE_FROM_RST
     -e "*FindYosys.cmake"
     -e "*graphviz*"
     -e "*sim_utils.cmake"
+    -e "*upvert"
 )
 # Cminx is used to convert SoCMake function comments into rST format later transformed to a
 # static html documentation using sphinx
