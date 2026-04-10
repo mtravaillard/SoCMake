@@ -71,4 +71,6 @@ function(add_ip_from_ipxact COMP_XML)
     endif()
     
     set(IP ${IP} PARENT_SCOPE)
+
+    set(${ip_vendor}__${ip_library}__${ip_name}_DIR "${ip_source_dir}" CACHE INTERNAL "" FORCE)
 endfunction()
