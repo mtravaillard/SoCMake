@@ -1,6 +1,6 @@
 include("../../SoCMakeConfig.cmake")
 
-option_enum(SIMULATOR "Which simulator to use" "questa;vivado_sim;xcelium;vcs;verilator;all" "questasim")
+option_enum(SIMULATOR "Which simulator to use" "questa;vivado_sim;xcelium;vcs;verilator;all" "questa")
 
 if(SIMULATOR STREQUAL "questa")
     questasim_configure_cxx(LIBRARIES DPI-C)
