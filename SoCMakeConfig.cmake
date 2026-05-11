@@ -110,6 +110,7 @@ include("${CMAKE_CURRENT_LIST_DIR}/cmake/build_scripts/riscv/sail/sail_install.c
 # ====== IPXact ======================
 # ====================================
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/ipxact/importer/ipxact_ip_importer.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/cmake/ipxact/sv2ipxact/sv2ipxact.cmake")
 
 # fusesoc importer
 include("${CMAKE_CURRENT_LIST_DIR}/cmake/fusesoc/add_ip_from_fusesoc.cmake")
