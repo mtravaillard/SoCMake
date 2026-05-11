@@ -1,21 +1,31 @@
-#[[[ @module ipxact
+#[[[ @module sv2ipxact
 #]]
-
 #[[[
 # Provides the following function:
 #
-#   sv_to_ipxact(
-#       TARGET      <target-name>          # name of the custom target created
+#   sv2ipxact(
 #       SV_FILE     <path/to/module.sv>    # input SystemVerilog file
-#       OUTDIR  <path/to/output/dir>   # where the .xml is written
+#       OUTDIR      <path/to/output/dir>   # where the .xml is written
 #       VENDOR      <vendor-string>        # VLNV vendor
 #       LIBRARY     <library-string>       # VLNV library
 #       [VERSION    <version-string>]      # VLNV version (default: "1.0")
+#       [PKG_FILES  <pkg1.sv> …]           # package files referenced by the module
+#       [DEFINES    <SYM> …]               # preprocessor symbols for `ifdef resolution
 #   )
 #
 # The output file is named <module-name>.xml, where <module-name> is derived
 # from the SV filename stem (the actual parsed module name is set by the script
 # itself inside the XML).
+#
+# Requirements:
+#   - CMake >= 3.18 (find_package(Python3) with Interpreter component)
+#   - Python 3 with pyslang installed  (pip install pyslang)
+#
+# The custom target is named:
+#   <VENDOR>_<LIBRARY>_<stem>_sv2ipxact
+# and is added to the ALL target so it always runs during a normal build.
+# The variable SV2IPXACT_OUTPUT_FILE is set in the caller's scope to the
+# absolute path of the generated XML file.
 #]]
 
 set(_SV2IPXACT_DEFAULT_SCRIPT
@@ -24,21 +34,20 @@ set(_SV2IPXACT_DEFAULT_SCRIPT
 )
 
 function(sv2ipxact)
-    cmake_parse_arguments(ARG "" "SV_FILE;OUTDIR;VENDOR;LIBRARY;VERSION" "" ${ARGN})
+    cmake_parse_arguments(ARG "" "SV_FILE;OUTDIR;VENDOR;LIBRARY;VERSION" "PKG_FILES;DEFINES" ${ARGN})
 
     foreach(_req SV_FILE VENDOR LIBRARY)
         if(NOT DEFINED ARG_${_req})
-            message(FATAL_ERROR "sv_to_ipxact: missing required argument ${_req}")
+            message(FATAL_ERROR "sv2ipxact: missing required argument ${_req}")
         endif()
     endforeach()
 
-    # Defaults
     if(NOT DEFINED ARG_VERSION)
         set(ARG_VERSION "1.0")
     endif()
 
     if(NOT ARG_OUTDIR)
-        set(ARG_OUTDIR ${PROJECT_BINARY_DIR}/ipxact)
+        set(ARG_OUTDIR "${PROJECT_BINARY_DIR}/ipxact")
     endif()
 
     get_filename_component(_sv_abs   "${ARG_SV_FILE}"               ABSOLUTE)
@@ -48,14 +57,41 @@ function(sv2ipxact)
 
     set(_xml_output "${_out_abs}/${_sv_stem}.xml")
 
-    # Sanity checks
     if(NOT EXISTS "${_sv_abs}")
         message(FATAL_ERROR
-            "sv_to_ipxact: SV_FILE not found:\n  ${_sv_abs}")
+            "sv2ipxact: SV_FILE not found:\n  ${_sv_abs}")
     endif()
 
     if(NOT EXISTS "${_tool_abs}")
-        message(FATAL_ERROR "sv_to_ipxact: sv2ipxact.py not found at:\n  ${_tool_abs}\n")
+        message(FATAL_ERROR
+            "sv2ipxact: sv2ipxact.py not found at:\n  ${_tool_abs}\n"
+            "  Set _SV2IPXACT_DEFAULT_SCRIPT or place sv2ipxact.py "
+            "next to sv2ipxact.cmake.")
+    endif()
+
+    set(_pkg_args)
+    set(_pkg_deps)
+
+    if(ARG_PKG_FILES)
+        list(APPEND _pkg_args "--pkg")
+        foreach(_pkg ${ARG_PKG_FILES})
+            get_filename_component(_pkg_abs "${_pkg}" ABSOLUTE)
+            if(NOT EXISTS "${_pkg_abs}")
+                message(WARNING
+                    "sv2ipxact: PKG_FILES entry not found: ${_pkg_abs}")
+            endif()
+            list(APPEND _pkg_args "${_pkg_abs}")
+            list(APPEND _pkg_deps "${_pkg_abs}")
+        endforeach()
+    endif()
+
+    set(_define_args)
+
+    if(ARG_DEFINES)
+        list(APPEND _define_args "--define")
+        foreach(_sym ${ARG_DEFINES})
+            list(APPEND _define_args "${_sym}")
+        endforeach()
     endif()
 
     file(MAKE_DIRECTORY "${_out_abs}")
@@ -69,11 +105,15 @@ function(sv2ipxact)
                     --vendor  "${ARG_VENDOR}"
                     --library "${ARG_LIBRARY}"
                     --version "${ARG_VERSION}"
+                    ${_pkg_args}
+                    ${_define_args}
         DEPENDS
             "${_sv_abs}"
             "${_tool_abs}"
+            ${_pkg_deps}
         COMMENT
-            "[sv2ipxact] ${_sv_stem}.sv → ${_sv_stem}.xml  (${ARG_VENDOR}:${ARG_LIBRARY}:${_sv_stem}:${ARG_VERSION})"
+            "[sv2ipxact] ${_sv_stem}.sv → ${_sv_stem}.xml"
+            "  (${ARG_VENDOR}:${ARG_LIBRARY}:${_sv_stem}:${ARG_VERSION})"
         VERBATIM
     )
 
@@ -84,6 +124,8 @@ function(sv2ipxact)
     set(SV2IPXACT_OUTPUT_FILE "${_xml_output}" PARENT_SCOPE)
 
     message(STATUS
-        "[sv2ipxact] Registered target '${ARG_VENDOR}_${ARG_LIBRARY}_${_sv_stem}_sv2ipxact': "
-        "${_sv_stem}.sv → ${_sv_stem}.xml")
+        "[sv2ipxact] Registered target "
+        "'${ARG_VENDOR}_${ARG_LIBRARY}_${_sv_stem}_sv2ipxact': "
+        "${_sv_stem}.sv → ${_sv_stem}.xml"
+    )
 endfunction()
