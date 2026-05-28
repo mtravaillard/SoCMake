@@ -202,7 +202,8 @@ function(xcelium IP_LIB)
         -xmlibdirpath ${OUTDIR}
         $<$<NOT:$<BOOL:${ARG_32BIT}>>:-64bit>
         $<$<BOOL:${ARG_GUI}>:-gui>
-        $<$<BOOL:${ARG_GUI_VERISIUM}>:-debug_opts verisium_interactive>
+        $<$<BOOL:${ARG_GUI_VERISIUM}>:-debug_opts>
+        $<$<BOOL:${ARG_GUI_VERISIUM}>:verisium_interactive>
         ${hdl_libs_args}
         ${dpi_libs_args}
         ${ARG_RUN_ARGS}
