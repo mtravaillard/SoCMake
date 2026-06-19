@@ -17,6 +17,8 @@ include_guard(GLOBAL)
 # :type NO_RUN_TARGET: bool
 # :keyword GUI: Run simulation in GUI mode.
 # :type GUI: bool
+# :keyword GUI_VERISIUM: Run simulation in GUI, with Verisium.
+# :type GUI_VERISIUM: bool
 # :keyword 32BIT: Use 32 bit compilation and simulation.
 # :type 32BIT: bool
 # :keyword OUTDIR: Output directory for the Xcelium compilation and simulation.
@@ -43,7 +45,7 @@ include_guard(GLOBAL)
 # :type FILE_SETS: list[string]
 #]]
 function(xcelium IP_LIB)
-    cmake_parse_arguments(ARG "NO_RUN_TARGET;GUI;32BIT" "OUTDIR;RUN_TARGET_NAME;TOP_MODULE;LIBRARY" "COMPILE_ARGS;XRUN_COMPILE_ARGS;SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;ELABORATE_ARGS;RUN_ARGS;FILE_SETS;" ${ARGN})
+    cmake_parse_arguments(ARG "NO_RUN_TARGET;GUI;GUI_VERISIUM;32BIT" "OUTDIR;RUN_TARGET_NAME;TOP_MODULE;LIBRARY" "COMPILE_ARGS;XRUN_COMPILE_ARGS;SV_COMPILE_ARGS;VHDL_COMPILE_ARGS;ELABORATE_ARGS;RUN_ARGS;FILE_SETS;" ${ARGN})
     if(ARG_UNPARSED_ARGUMENTS)
         message(FATAL_ERROR "${CMAKE_CURRENT_FUNCTION} passed unrecognized argument " "${ARG_UNPARSED_ARGUMENTS}")
     endif()
@@ -75,6 +77,10 @@ function(xcelium IP_LIB)
         set(OUTDIR ${ARG_OUTDIR})
     endif()
     file(MAKE_DIRECTORY ${OUTDIR})
+
+    if(ARG_GUI_VERISIUM)
+        set(ARG_GUI FALSE)
+    endif()
 
     if(ARG_32BIT)
         set(bitness 32)
@@ -196,6 +202,8 @@ function(xcelium IP_LIB)
         -xmlibdirpath ${OUTDIR}
         $<$<NOT:$<BOOL:${ARG_32BIT}>>:-64bit>
         $<$<BOOL:${ARG_GUI}>:-gui>
+        $<$<BOOL:${ARG_GUI_VERISIUM}>:-debug_opts>
+        $<$<BOOL:${ARG_GUI_VERISIUM}>:verisium_interactive>
         ${hdl_libs_args}
         ${dpi_libs_args}
         ${ARG_RUN_ARGS}
