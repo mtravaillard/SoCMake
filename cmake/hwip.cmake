@@ -15,25 +15,25 @@ include("${CMAKE_CURRENT_LIST_DIR}//utils/file_paths.cmake")
 # * <vendor>::<library>::<name>::<version> ('__' replaced by '::')
 # * <vendor>::<library>::<name> (short name without the version)
 #
-# This function can be used in FULL and SHORT form:
-# Full form:
-# ::
+# This function can be used in FULL and SHORT form.
+#
+# Full form::
+#
 #   add_ip(ip
 #      VENDOR vendor
 #      LIBRARY lib
 #      VERSION 1.2.3
 #      DESCRIPTION "This is a sample IP"
 #      )
-# 
-# In full form it is possible to ommit VENDOR, LIBRARY and VERSION, DESCRIPTION, although it is not recommended.
 #
-# Ommiting them all would have following signature:
-# ::
+# In full form it is possible to omit VENDOR, LIBRARY, VERSION, and DESCRIPTION, although it is not recommended.
+#
+# Omitting them all would have following signature::
+#
 #   add_ip(ip2)
-# 
 #
-# Short form:
-# ::
+# Short form::
+#
 #   add_ip(vendor2::lib2::ip2::1.2.2)
 # 
 # In short form only the full VLNV format is accepted
@@ -120,9 +120,9 @@ endfunction()
 #[[[
 # This function creates an IP name provided vendor, library, name, and version (VLNV) information.
 #
-# This functions appends the vendor, library, name, and version (VLNV) information separated by '__'
+# This function appends the vendor, library, name, and version (VLNV) information separated by '__'
 # to create a unique string representing an IP name. This string is used as the library name when
-# when calling the cmake built-in
+# calling the cmake built-in
 # `add_library() <https://cmake.org/cmake/help/latest/command/add_library.html>`_ function (see add_ip()).
 #
 # :param OUTVAR: The generate IP name.
@@ -160,25 +160,25 @@ function(create_ip_vlnv OUTVAR IP_NAME)
 endfunction()
 
 #[[[
-# This function parses IP name from the VLNV format e.g. (vendor::lib::ip::0.0.1)
+# This function parses an IP VLNV string into its individual components.
 #
-# This functions appends the vendor, library, name, and version (VLNV) information separated by '__'
-# to create a unique string representing an IP name. This string is used as the library name when
-# when calling the cmake built-in
-# `add_library() <https://cmake.org/cmake/help/latest/command/add_library.html>`_ function (see add_ip()).
+# Accepts either the full four-part format ``vendor::lib::ip::0.0.1`` or the
+# short single-name format ``ip``.  The parsed values are written into the
+# caller's scope via the output variable names supplied as arguments.
 #
-# :param OUTVAR: The generate IP name.
-# :type OUTVAR: string
-# :param IP_NAME: The name of the IP.
-# :type IP_NAME: string
+# In the short form only ``IP_NAME`` is set; ``VENDOR``, ``LIBRARY``, and
+# ``VERSION`` are unset in the parent scope.  Any other number of
+# ``::``-separated tokens is a fatal error.
 #
-# **Keyword Arguments**
-#
-# :keyword VENDOR: Name of the IP vendor.
+# :param IP_VLNV: The VLNV string to parse (e.g. ``vendor::lib::ip::0.0.1`` or ``ip``).
+# :type IP_VLNV: string
+# :param VENDOR: Output variable name that receives the vendor field.
 # :type VENDOR: string
-# :keyword LIBRARY: Name of the IP library.
+# :param LIBRARY: Output variable name that receives the library field.
 # :type LIBRARY: string
-# :keyword VERSION: Version of the IP following a three-part version number (Major.Minor.Patch, e.g., 1.0.13).
+# :param IP_NAME: Output variable name that receives the IP name field.
+# :type IP_NAME: string
+# :param VERSION: Output variable name that receives the version field (e.g. ``1.0.13``).
 # :type VERSION: string
 #]]
 function(parse_ip_vlnv IP_VLNV VENDOR LIBRARY IP_NAME VERSION)
@@ -218,6 +218,7 @@ function(parse_ip_vlnv IP_VLNV VENDOR LIBRARY IP_NAME VERSION)
     endif()
 endfunction()
 
+
 #[[[
 # This function adds source file(s) to an IP target.
 #
@@ -232,23 +233,19 @@ endfunction()
 #
 # :param IP_LIB: The target IP library.
 # :type IP_LIB: string
-# :param TYPE: The type of source file(s).
-# :type TYPE: string
-# :param FILE_SET: Specify to which file set to associate the listed files
-# :type FILE_SET: string
-# :param HEADERS: List of header files. Header files are stored in separate property ${LANGUAGE}_HEADERS, the include directory will also be set.
-# :type HEADERS: list
+# :param LANGUAGE: The language type of the source files (e.g. SYSTEMVERILOG, VHDL).
+# :type LANGUAGE: string
 #
 # **Keyword Arguments**
 #
-# :keyword [PREPEND]: This keyword enable prepending the new source files with respect to the existing ones.
-# :type [PREPEND]: boolean
-# :keyword [REPLACE]: Replace the existing files.
-# :type [REPLACE]: boolean
-# :param [FILE_SET]: Specify to which file set to associate the listed files
-# :type [FILE_SET]: string
-# :param [HEADERS]: List of header files. Header files are stored in separate property ${LANGUAGE}_HEADERS
-# :type [HEADERS]: list
+# :keyword PREPEND: Prepend the new source files before the existing ones instead of appending.
+# :type PREPEND: bool
+# :keyword REPLACE: Replace the existing source file list instead of appending.
+# :type REPLACE: bool
+# :keyword FILE_SET: Name of the file set to associate the listed files with; defaults to DEFAULT.
+# :type FILE_SET: string
+# :keyword HEADERS: List of header files. Stored in the ``${LANGUAGE}_${FILE_SET}_HEADERS`` property; their parent directories are added as include directories automatically.
+# :type HEADERS: list[string]
 #]]
 function(ip_sources IP_LIB LANGUAGE)
     cmake_parse_arguments(ARG "PREPEND;REPLACE" "FILE_SET" "HEADERS" ${ARGN})
@@ -321,12 +318,12 @@ endfunction()
 #
 # **Keyword Arguments**
 #
-# :keyword [NO_DEPS]: Only return the list off IPs that are immedieate childrean from the current IP
-# :type [NO_DEPS]: bool
-# :keyword [HEADERS]: Return the list of HEADER files only.
-# :type [HEADERS]: bool
-# :keyword [FILE_SETS]: Specify list of File sets to retrieve the files from
-# :type [FILE_SETS]: list[string]
+# :keyword NO_DEPS: If set, only return sources belonging directly to IP_LIB, without traversing its dependencies.
+# :type NO_DEPS: bool
+# :keyword HEADERS: If set, return header files instead of source files.
+# :type HEADERS: bool
+# :keyword FILE_SETS: Restrict results to the listed file sets; returns all file sets when omitted.
+# :type FILE_SETS: list[string]
 #]]
 function(get_ip_sources OUTVAR IP_LIB LANGUAGE)
     cmake_parse_arguments(ARG "NO_DEPS;HEADERS" "" "FILE_SETS" ${ARGN})
@@ -456,10 +453,10 @@ endfunction()
 #
 # **Keyword Arguments**
 #
-# :keyword [NO_DEPS]: Only return the list off IPs that are immediate childrean from the current IP
-# :type [NO_DEPS]: bool
-# :keyword [FILE_SETS]: Specify list of File sets to retrieve the include directories from
-# :type [FILE_SETS]: list[string]
+# :keyword NO_DEPS: If set, only return include directories belonging directly to IP_LIB, without traversing its dependencies.
+# :type NO_DEPS: bool
+# :keyword FILE_SETS: Restrict results to the listed file sets; returns all file sets when omitted.
+# :type FILE_SETS: list[string]
 #]]
 function(get_ip_include_directories OUTVAR IP_LIB LANGUAGE)
     cmake_parse_arguments(ARG "NO_DEPS" "" "FILE_SETS" ${ARGN})
@@ -513,7 +510,7 @@ function(get_ip_include_directories OUTVAR IP_LIB LANGUAGE)
     set(${OUTVAR} ${INCDIRS} PARENT_SCOPE)
 endfunction()
 
-# This fonctions is used by the next function, to compare available version of IPs with the versions wanted.
+# This function is used by the next function, to compare available version of IPs with the versions wanted.
 #
 # The allowed comparisons are ==, >=, >, <=, <, !=
 function(__compare_version RESULT COMPARE_LHS RELATION COMPARE_RHS)
@@ -605,8 +602,8 @@ endfunction()
 #
 # **Keyword Arguments**
 #
-# :keyword NODEPEND: This keyword disable the dependency between the targets.
-# :type NODEPEND: string
+# :keyword NODEPEND: If set, skip adding a build dependency between the linked targets (only the link is added).
+# :type NODEPEND: bool
 #
 #]]
 function(ip_link IP_LIB)
@@ -661,8 +658,8 @@ endfunction()
 # :type IP_LIB: string
 # :param PROPERTY: Property to retrieve from IP_LIB.
 # :type PROPERTY: string
-# :keyword [NO_DEPS]: Only return the list off IPs that are immedieate childrean from the current IP
-# :type [NO_DEPS]: bool
+# :keyword NO_DEPS: If set, only return the property from IP_LIB itself, without traversing its dependencies.
+# :type NO_DEPS: bool
 #
 #]]
 function(get_ip_property OUTVAR IP_LIB PROPERTY)
@@ -749,22 +746,25 @@ endfunction()
 
 
 #[[[
-# This function is a hardcoded version of get_ip_property() for the
-# <LANGUAGE>_COMPILE_DEFINITIONS property.
+# Retrieve compile definitions for one or more languages from IP_LIB and its dependencies.
 #
-# :param OUTVAR: Variable containing the requested property.
+# :param OUTVAR: Variable that receives the list of compile definitions (without leading ``-D``).
 # :type OUTVAR: string
 # :param IP_LIB: The target IP library.
 # :type IP_LIB: string
-# :param LANGUAGE: Language to which the definition apply.
+# :param LANGUAGE: First language whose compile definitions should be retrieved (e.g. ``SYSTEMVERILOG``, ``VHDL``).
+#   Despite the singular name, **additional languages may be appended as extra positional arguments** after
+#   ``LANGUAGE``; definitions are collected in the order the languages are listed and duplicates are removed.
+#   Example: ``get_ip_compile_definitions(DEFS ${IP} VERILOG SYSTEMVERILOG)`` returns VERILOG definitions
+#   first, then SYSTEMVERILOG definitions.
 # :type LANGUAGE: string
 #
 # **Keyword Arguments**
 #
-# :keyword [NO_DEPS]: Only return the list off IPs that are immediate childrean from the current IP
-# :type [NO_DEPS]: bool
-# :keyword [FILE_SETS]: Specify list of File sets to retrieve the include directories from
-# :type [FILE_SETS]: list[string]
+# :keyword NO_DEPS: If set, only return compile definitions belonging directly to IP_LIB, without traversing its dependencies.
+# :type NO_DEPS: bool
+# :keyword FILE_SETS: Restrict results to the listed file sets; returns all file sets when omitted.
+# :type FILE_SETS: list[string]
 #]]
 function(get_ip_compile_definitions OUTVAR IP_LIB LANGUAGE)
     cmake_parse_arguments(ARG "NO_DEPS" "" "FILE_SETS" ${ARGN})
@@ -819,12 +819,17 @@ function(get_ip_compile_definitions OUTVAR IP_LIB LANGUAGE)
 endfunction()
 
 #[[[
-# Get the IP link graph in a flat list
+# Return the dependency graph of IP_LIB as a flat, topologically-sorted list.
 #
-# :param OUTVAR: Variable containing the link list.
+# :param OUTVAR: Variable that receives the ordered list of IP targets.
 # :type OUTVAR: string
-# :keyword [NO_DEPS]: Only return the list off IPs that are immedieate childrean from the current IP
-# :type [NO_DEPS]: bool
+# :param IP_LIB: The target IP library whose link graph should be retrieved.
+# :type IP_LIB: string
+#
+# **Keyword Arguments**
+#
+# :keyword NO_DEPS: If set, only return the direct (immediate) dependencies of IP_LIB instead of the full transitive graph.
+# :type NO_DEPS: bool
 #]]
 function(get_ip_links OUTVAR IP_LIB)
     cmake_parse_arguments(ARG "NO_DEPS" "" "" ${ARGN})
@@ -858,9 +863,9 @@ function(socmake_add_languages)
 endfunction()
 
 #[[[
-# This function return a list of the supported language by your SoCMake environnement.
+# This function returns a list of the supported languages by your SoCMake environment.
 #
-# This means, the langauges initially supported by SoCMake and the one that have been added using ``socmake_add_languages()``.
+# This means, the languages initially supported by SoCMake and the ones that have been added using ``socmake_add_languages()``.
 #
 # :param OUTVAR: Variable in which to store the supported languages
 # :type OUTVAR: list[string]
@@ -882,16 +887,14 @@ function(get_socmake_languages OUTVAR)
 endfunction()
 
 #[[[
-# This function checks the the language is supported by SoCMake.
+# Check whether a language is supported by SoCMake and emit a warning or fatal error if not.
 #
-# This function checks the the language is supported by SoCMake and issue a warning/error depending
-# on the verbosity level. The supported languages can be augmented using the variable
-# SOCMAKE_ADDITIONAL_LANGUAGES.
+# The verbosity level is controlled by the ``SOCMAKE_UNSUPPORTED_LANGUAGE_FATAL`` variable:
+# when set, an unsupported language causes a FATAL_ERROR; otherwise a WARNING is emitted.
+# The set of supported languages can be extended with ``socmake_add_languages()``.
 #
-# :param OUT: The variable in which to store the original retrieved name.
-# :type OUT: string
-# :param LIB: The target IP library name.
-# :type LIB: string
+# :param LANGUAGE: The language identifier to validate (e.g. SYSTEMVERILOG, VHDL).
+# :type LANGUAGE: string
 #
 #]]
 function(check_languages LANGUAGE)
@@ -978,7 +981,7 @@ function(socmake_allow_topological_sort STATE)
 endfunction()
 
 #[[[
-# This function return the value of ``SOCMAKE_ALLOW_TOPOLOGICAL_SORT``, the variable used to allow or disallow flattening.
+# This function returns the value of ``SOCMAKE_ALLOW_TOPOLOGICAL_SORT``, the variable used to allow or disallow flattening.
 # By default, it's set to ON.
 #
 # :param OUTVAR: Variable that will store the value of ``SOCMAKE_ALLOW_TOPOLOGICAL_SORT``.
