@@ -2,6 +2,7 @@
 #]]
 
 include_guard(GLOBAL)
+include("${CMAKE_CURRENT_LIST_DIR}/../../utils/socmake_message.cmake")
 
 include(${CMAKE_CURRENT_LIST_DIR}/../sv2v.cmake)
 
@@ -38,7 +39,7 @@ function(yosys IP_LIB)
     cmake_parse_arguments(ARG "SV2V;SHOW;REPLACE" "OUTDIR;TOP;PLUGINS;SCRIPTS" "" ${ARGN})
     # Check for any unrecognized arguments
     if(ARG_UNPARSED_ARGUMENTS)
-        message(FATAL_ERROR "${CMAKE_CURRENT_FUNCTION} passed unrecognized argument " "${ARG_UNPARSED_ARGUMENTS}")
+        socmake_message(FATAL_ERROR "${CMAKE_CURRENT_FUNCTION} passed unrecognized argument " "${ARG_UNPARSED_ARGUMENTS}")
     endif()
 
     # Include the hardware IP managament main functions
@@ -70,11 +71,11 @@ function(yosys IP_LIB)
 
     # If SV2V argument is passed and the target does not exist, convert SystemVerilog to Verilog
     if(ARG_SV2V AND NOT TARGET ${IP_LIB}_sv2v)
-        message("Yosys ${IP_LIB}: sv2v argument call")
+        socmake_message(STATUS "Yosys ${IP_LIB}: sv2v argument call")
         # Replace the original files with the generated ones
         sv2v(${IP_LIB} REPLACE)
     else()
-        message("Yosys ${IP_LIB}: sv2v argument NOT call")
+        socmake_message(STATUS "Yosys ${IP_LIB}: sv2v argument NOT call")
         # Otherwise use original source files
         get_ip_sources(SOURCES ${IP_LIB} SYSTEMVERILOG VERILOG)
         list(REMOVE_DUPLICATES SOURCES)
@@ -86,7 +87,7 @@ function(yosys IP_LIB)
     # Format the string for config file format
     string (REPLACE ";" " " V_FILES_STR "${SOURCES}")
 
-    message("Yosys V_FILES_STR: ${V_FILES_STR}")
+    socmake_message(STATUS "Yosys V_FILES_STR: ${V_FILES_STR}")
 
     # Get the IP compile definitions (e.g., )
     get_ip_compile_definitions(COMP_DEFS ${IP_LIB} SYSTEMVERILOG VERILOG)
@@ -133,7 +134,7 @@ function(yosys IP_LIB)
             if(${__type} STREQUAL "SHARED_LIBRARY" OR ${__type} STREQUAL "STATIC_LIBRARY")
                 list(APPEND __PLUGINS_ARG -m $<TARGET_FILE:${plugin}>)
             else()
-                message(FATAL_ERROR "Only Shared and Static libraries are supported for Yosys PLUGINS at the moment")
+                socmake_message(FATAL_ERROR "Only Shared and Static libraries are supported for Yosys PLUGINS at the moment")
             endif()
         endforeach()
     endif()

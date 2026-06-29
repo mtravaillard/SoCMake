@@ -1,5 +1,6 @@
 #[[[ @module uniquify_files_by_basename
 #]]
+include("${CMAKE_CURRENT_LIST_DIR}/socmake_message.cmake")
 
 #[[[
 # This function uniquify a list of files based on the basename (name + extension) of the files.
@@ -19,30 +20,30 @@ function(uniquify_files_by_basename OUTPUT_LIST INPUT_LIST MESSAGE_MODE)
     # set(_seen_basenames "")
     set(_unique_files "")
 
-    message(DEBUG "UNIQUIFY: INPUT_LIST ${INPUT_LIST}")
+    socmake_message(DEBUG "UNIQUIFY: INPUT_LIST ${INPUT_LIST}")
 
     foreach(file ${INPUT_LIST})
         # Get the basename of the file (name + extension)
         get_filename_component(basename ${file} NAME)
 
-        message(DEBUG "UNIQUIFY: checking file ${file}")
+        socmake_message(DEBUG "UNIQUIFY: checking file ${file}")
 
         if(NOT _seen_basenames_${basename})
             # If the basename is not yet seen, mark it and store the full path
             set(_seen_basenames_${basename} ${file})
             list(APPEND _unique_files ${file})
-            message(DEBUG "    '-> First occurence stored in _unique_files")
+            socmake_message(DEBUG "    '-> First occurence stored in _unique_files")
         else()
             # If the basename has been seen, compare file contents
             file(READ ${file} CURRENT_CONTENT)
             file(READ ${_seen_basenames_${basename}} ORIGINAL_CONTENT)
             if(NOT "${CURRENT_CONTENT}" STREQUAL "${ORIGINAL_CONTENT}")
-                message(${MESSAGE_MODE} "Files ${file} and ${_seen_basenames_${basename}} have the same basename (${basename}) but different content.")
+                socmake_message(${MESSAGE_MODE} "Files ${file} and ${_seen_basenames_${basename}} have the same basename (${basename}) but different content.")
             endif()
         endif()
     endforeach()
 
-    message(DEBUG "UNIQUIFY: OUTPUT_LIST ${_unique_files}")
+    socmake_message(DEBUG "UNIQUIFY: OUTPUT_LIST ${_unique_files}")
 
     # Return the list of unique files
     set(${OUTPUT_LIST} ${_unique_files} PARENT_SCOPE)
