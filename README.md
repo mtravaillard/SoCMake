@@ -28,7 +28,7 @@ SoCMake key features are:
 * Mixed-language SV-VHDL-SC simulation
 * SystemVerilog-UVM and VHDL-UVVM support
 * CocoTB Python co-simulation support
-* Software and IP block package managment with CMake package managers
+* Software and IP block package management with CMake package managers
 * HDL code generation and conversion (PeakRDL, desyrdl, yosys, sv2v, ..)
 * Build graph generation with graphviz
 
@@ -56,7 +56,7 @@ project(adder NONE)                  # Name of CMake project
 find_package(socmake REQUIRED)
 
 # Create an IP block called adder
-add_ip(adder)  
+add_ip(adder)
 # Add verilog file adder.v to adder IP
 ip_sources(adder VERILOG
                  ./adder.v)
